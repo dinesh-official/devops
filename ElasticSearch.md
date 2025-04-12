@@ -1,35 +1,76 @@
-The Elastic Stack — formerly known as the ELK Stack — is a collection of open-source software produced by Elastic which allows you to search, analyze, and visualize logs generated from any source in any format, a practice known as centralized logging. Centralized logging can be useful when attempting to identify problems with your servers or applications as it allows you to search through all of your logs in a single place. It’s also useful because it allows you to identify issues that span multiple servers by correlating their logs during a specific time frame.
+# 🚀 Elastic Stack (ELK Stack) Installation Guide — Elasticsearch 7.7.1
 
-The Elastic Stack has four main components:
-Filebeat -> Elasticsearch -> Kibina 
+The **Elastic Stack** — formerly known as the **ELK Stack** — is a collection of open-source software produced by Elastic. It enables you to search, analyze, and visualize logs from any source and in any format — a practice known as centralized logging.
 
+Centralized logging is helpful for:
+- Identifying problems with your servers or applications
+- Searching logs from a single place
+- Correlating events across multiple servers by time
 
-Note: When installing the Elastic Stack, you must use the same version across the entire stack. In this tutorial we will install the latest versions of the entire stack which are, at the time of this writing, Elasticsearch 7.7.1, Kibana 7.7.1, Logstash 7.7.1, and Filebeat 7.7.1.
+## 🔧 Components
 
+```
+Filebeat → Elasticsearch → Kibana
+```
 
+> ⚠️ **Note:** When installing the Elastic Stack, all components must use the **same version**.  
+> This guide uses **version 7.7.1** of Elasticsearch, Kibana, Logstash, and Filebeat.
 
-Step 1 — Installing and Configuring Elasticsearch
+---
 
-curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch |sudo gpg --dearmor -o /usr/share/keyrings/elastic.gpg
+## 🥇 Step 1 — Installing and Configuring Elasticsearch
 
+### 1. Add GPG Key
+
+```bash
+curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elastic.gpg
+```
+
+### 2. Add APT Repository
+
+```bash
 echo "deb [signed-by=/usr/share/keyrings/elastic.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+```
 
+### 3. Update Package Index
+
+```bash
 sudo apt update
+```
 
+### 4. Install Elasticsearch
+
+```bash
 sudo apt install elasticsearch
+```
 
-sudo nano /etc/elasticsearch/elasticsearch.yml
+### 5. Configure Elasticsearch to Listen on All Interfaces
 
+```bash
 echo "network.host: 0.0.0.0" | sudo tee -a /etc/elasticsearch/elasticsearch.yml
+```
 
+> Optional: To edit manually instead  
+> ```bash
+> sudo nano /etc/elasticsearch/elasticsearch.yml
+> ```
+
+### 6. Start and Enable Elasticsearch
+
+```bash
 sudo systemctl start elasticsearch
-
 sudo systemctl enable elasticsearch
+```
 
+### 7. Verify Installation
+
+```bash
 curl -X GET "localhost:9200"
+```
 
-Expexted output:
+#### ✅ Expected Output:
 
+```json
 {
   "name" : "Elasticsearch",
   "cluster_name" : "elasticsearch",
@@ -47,9 +88,9 @@ Expexted output:
   },
   "tagline" : "You Know, for Search"
 }
+```
 
+---
 
-
-
-
-
+✅ **Elasticsearch is now installed and running!**  
+➡️ Continue with Kibana, Filebeat, and optionally Logstash in the next steps.
