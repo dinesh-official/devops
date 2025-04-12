@@ -1,0 +1,27 @@
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/nginx/access.log
+
+output.elasticsearch:
+  hosts: ["http://localhost:9200"]
+
+setup.kibana:
+  host: "http://localhost:5601"
+
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: /var/log/filebeat
+  name: filebeat.log
+  keepfiles: 7
+  permissions: 0644
+
+processors:
+  - dissect:
+      tokenizer: "%{nginx.client.ip} - %{nginx.user} [%{nginx.timestamp}] \"%{nginx.request.method} %{nginx.request.url} HTTP/%{nginx.request.http}\" %{nginx.response.status} %{nginx>
+      field: "message"
+      target_prefix: "nginx"
+
+# Include other necessary processors or fields based on your setup
