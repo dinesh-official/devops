@@ -47,12 +47,23 @@ sudo apt install elasticsearch
 ### 5. Configure Elasticsearch to Listen on All Interfaces
 
 ```bash
-echo "network.host: 0.0.0.0" | sudo tee -a /etc/elasticsearch/elasticsearch.yml
+echo -e "network.host: 0.0.0.0\ndiscovery.type: single-node" | sudo tee -a /etc/elasticsearch/elasticsearch.yml
 ```
 
 > Optional: To edit manually instead  
 > ```bash
 > sudo nano /etc/elasticsearch/elasticsearch.yml
+> ```
+> Add this 
+> ```bash
+> . . .
+# ---------------------------------- Network -----------------------------------
+#
+# Set the bind address to a specific IP (IPv4 or IPv6):
+#
+network.host: localhost
+discovery.type: single-node
+. . .
 > ```
 
 ### 6. Start and Enable Elasticsearch
