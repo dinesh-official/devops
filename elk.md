@@ -14,7 +14,7 @@ Filebeat → Elasticsearch → Kibana
 ```
 
 > ⚠️ **Note:** When installing the Elastic Stack, all components must use the **same version**.  
-> This guide uses **version 7.7.1** of Elasticsearch, Kibana, Logstash, and Filebeat.
+> This guide uses **version 7.7.1** of Elasticsearch, Kibana, and Filebeat.
 
 ## 𝔸 Architecture
 
