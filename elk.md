@@ -1,4 +1,4 @@
-# 🚀 Elastic Stack (ELK Stack) Installation Guide — Elasticsearch 7.7.1
+# 🚀 ELK Stack Installation Guide 
 
 The **Elastic Stack** — formerly known as the **ELK Stack** — is a collection of open-source software produced by Elastic. It enables you to search, analyze, and visualize logs from any source and in any format — a practice known as centralized logging.
 
