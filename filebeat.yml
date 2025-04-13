@@ -1,11 +1,11 @@
 filebeat.inputs:
 # Under a Specific Input for nginx log prashing {        
-# Get input from nginx
+  # Get input from nginx
   - type: log
     enabled: true
     paths:
       - /var/log/nginx/access.log
-# Processors -> pharse the logs into seprate fields
+  # Processors -> pharse the logs into seprate fields
     processors:
       - dissect:
           tokenizer: "%{nginx.client.ip} - %{nginx.user} [%{nginx.timestamp}] \"%{nginx.request.method} %{nginx.request.url} HTTP/%{nginx.request.http}\" %{nginx.response.status} %{nginx.bytes}"
@@ -20,12 +20,12 @@ filebeat.inputs:
 
 
 # Under a Specific Input for haproxy log prashing {            
-# Get input from HAProxy
+  # Get input from HAProxy
   - type: log
     enabled: true
     paths:
       - /var/log/haproxy.log
-# Processors -> pharse the logs into seprate fields
+  # Processors -> pharse the logs into seprate fields
     processors:
       - dissect:
           tokenizer: "%{client.ip}:%{client.port} [%{haproxy.timestamp}] %{frontend} %{backend}/%{server} %{Tq}/%{Tw}/%{Tc}/%{Tr}/%{Tt} %{response.status} %{bytes} %{request_cookie} %{response_cookie} %{termination_state} %{actconn}/%{feconn}/%{beconn}/%{srv_conn}/%{retries} %{srv_queue}/%{backend_queue} \"%{request}\""
