@@ -779,7 +779,7 @@ You might have:
 - Clean and modular routing of log data
 
 
-# Grok Filters in Filebeat (dissect)
+# Grok/Dissect Filters in Filebeat 
 
 To implement **Grok filters** in Filebeat, you would typically use **processors** to parse and extract structured data from unstructured log data. Grok is a tool for pattern matching that allows you to define custom patterns for parsing logs. In Filebeat, Grok filters can be implemented by using the **grok processor** to process logs before they are sent to an output.
 
