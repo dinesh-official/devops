@@ -1,5 +1,5 @@
 filebeat.inputs:
-
+# Under a Specific Input for nginx log prashing {        
 # Get input from nginx
   - type: log
     enabled: true
@@ -16,8 +16,10 @@ filebeat.inputs:
           fields:
             service: nginx
             log_type: access
+  # }
 
-# {            
+
+# Under a Specific Input for haproxy log prashing {            
 # Get input from HAProxy
   - type: log
     enabled: true
