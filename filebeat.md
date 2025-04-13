@@ -624,9 +624,9 @@ processors:
 Great question! Let’s break down what it means to use **processors under a specific input** in Filebeat:
 
 ---
+
 Here’s a simplified explanation of **global processors** in Filebeat:
 
----
 
 ## Global Processors
 
@@ -657,14 +657,14 @@ filebeat.inputs:
       - /var/log/*/*.log
 ```
 
----
+
 
 ***What Happens in This Example?***
 
 1. **`add_fields`**: Adds `environment: production` and `app_version: 1.0.0` to **all logs**.
 2. **`drop_event`**: Drops any logs where the `log.level` is "debug".
 
----
+
 
 ***Why Use Global Processors?***
 
@@ -672,7 +672,6 @@ filebeat.inputs:
 - **Avoid repetition** in input-specific configurations.
 - **Simplify** your configuration when processing logs in bulk.
 
----
 
 This setup means **every log Filebeat collects** will have the same enrichment (like `environment` and `app_version` fields), and unnecessary logs (like debug logs) will be filtered out globally.
 
