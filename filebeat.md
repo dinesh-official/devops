@@ -46,7 +46,7 @@ sudo dpkg -i filebeat-7.7.1-amd64.deb
 ```bash
 sudo systemctl enable filebeat
 ```
-# install by Elastic APT repository
+# Install by Elastic APT repository
 If you want to install Filebeat using `sudo apt install filebeat` instead of manually downloading and installing the `.deb` package, you can follow these steps to set up the Elastic APT repository and install Filebeat directly using APT:
 
 ### Step-by-Step Instructions:
