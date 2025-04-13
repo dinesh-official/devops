@@ -622,8 +622,8 @@ processors:
 Great question! Let’s break down what it means to use **processors under a specific input** in Filebeat:
 
 ---
-# Under a Specific Input
-## 🎯 What Does “Under a Specific Input” Mean?
+## Under a Specific Input
+***🎯 What Does “Under a Specific Input” Mean?***
 
 In Filebeat, you can define **multiple inputs**, each watching different log files or directories.
 
