@@ -412,6 +412,101 @@ sudo filebeat modules disable nginx
 
 ---
 
+### Filebeat Modules: Prebuilt Configurations for Common Services
+
+Filebeat **Modules** are preconfigured sets of input, processor, and output configurations designed for **common log formats** and **services**. They help you quickly start collecting, parsing, and forwarding logs for services without needing to manually configure each part.
+
+---
+
+### 🧠 What Does a Module Contain?
+
+A **Filebeat Module** typically includes:
+
+1. **Input Configuration**:
+   - Defines where Filebeat reads logs from.
+   - Specifies file paths, types, and other related settings.
+
+2. **Processors**:
+   - Prepares and enriches logs.
+   - Can include actions like parsing logs, extracting fields, and adding metadata.
+
+3. **Output Configuration**:
+   - Determines where the logs will be sent (Elasticsearch, Logstash, etc.).
+   - Often comes with predefined templates and mappings.
+
+4. **Kibana Dashboards**:
+   - Modules often come with **prebuilt Kibana dashboards** for visualizing the logs.
+   - These dashboards help you monitor services like Apache, Nginx, MySQL, and more.
+
+---
+
+### 🚀 Why Use Filebeat Modules?
+
+1. **Quick Setup**: No need to create custom parsing rules or dashboards for popular services.
+2. **Consistency**: Standardized configurations and visualizations that are widely used and trusted.
+3. **Time-Saving**: Save time on parsing, field extractions, and visualizations for common services.
+
+---
+
+### 🛠️ How to Use a Filebeat Module
+
+To enable and configure a module in Filebeat:
+
+1. **List Available Modules**:
+   ```bash
+   filebeat modules list
+   ```
+   This command shows a list of available modules (e.g., nginx, apache2, mysql, etc.).
+
+2. **Enable a Module**:
+   For example, to enable the **Nginx module**, run:
+   ```bash
+   sudo filebeat modules enable nginx
+   ```
+
+3. **Configure the Module**:
+   Each module has its own configuration file located in `/etc/filebeat/modules.d/`. You can configure log paths, processors, and other settings for each module:
+   ```yaml
+   filebeat.modules:
+   - module: nginx
+     access:
+       enabled: true
+       var.paths: ["/var/log/nginx/access.log"]
+     error:
+       enabled: true
+       var.paths: ["/var/log/nginx/error.log"]
+   ```
+
+4. **Test Configuration**:
+   Always test your Filebeat configuration before starting it to ensure everything is working properly:
+   ```bash
+   sudo filebeat test config
+   ```
+
+5. **Start Filebeat**:
+   After configuring the module, you can start Filebeat:
+   ```bash
+   sudo systemctl start filebeat
+   ```
+
+6. **View the Logs in Kibana**:
+   If you've configured the module correctly and are sending logs to Elasticsearch, you should be able to view them in Kibana with the prebuilt dashboards.
+
+---
+
+### 📊 Example: Nginx Module
+
+The **Nginx module** is one of the most commonly used Filebeat modules. Here's what it does:
+
+1. **Input**: Collects access and error logs from `/var/log/nginx/access.log` and `/var/log/nginx/error.log`.
+2. **Processors**: 
+   - Parses the Nginx log format.
+   - Extracts common fields like the client IP, HTTP method, response code, etc.
+3. **Output**: Sends the processed logs to Elasticsearch.
+4. **Kibana Dashboards**: Provides prebuilt dashboards that help you visualize the Nginx logs, such as request statistics, error rates, and top URLs.
+
+---
+
 ### 🧩 Structure of a Module
 
 Each module typically includes:
