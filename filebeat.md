@@ -2,6 +2,31 @@
 Filebeat is a lightweight log shipper by Elastic, designed to forward and centralize log data. It monitors log files (like `/var/log/nginx/access.log`), reads new entries, and ships them to Elasticsearch or Logstash for indexing and analysis.
 
 ---
+# Filebeat Workflow Architecture
+
+Here's a simplified version of the Filebeat workflow in a text-based architecture diagram:
+
+```
++-------------------+
+| 1️⃣ Watch log files|
++-------------------+
+         ↓
++-------------------+
+| 2️⃣ Read & Parse   |
++-------------------+
+         ↓
++-------------------+
+| 3️⃣ Convert to JSON|
++-------------------+
+         ↓
++-------------------+
+| 4️⃣ Send to Elastic|
++-------------------+
+         ↓
++---------------------+
+| 5️⃣ Index & Visualize|
++---------------------+
+```
 
 ## ✅ Step 1: Download and Install Filebeat 7.7.1
 Since 7.7.1 is an older version, you need to download the `.deb` package manually.
@@ -163,181 +188,182 @@ filebeat-* index pattern
 sudo systemctl enable filebeat
 ```
 
----
-
-
-# Filebeat Workflow Architecture
-
-Here's a simplified version of the Filebeat workflow in a text-based architecture diagram:
-
-```
-+-------------------+
-| 1️⃣ Watch log files|
-+-------------------+
-         ↓
-+-------------------+
-| 2️⃣ Read & Parse   |
-+-------------------+
-         ↓
-+-------------------+
-| 3️⃣ Convert to JSON|
-+-------------------+
-         ↓
-+-------------------+
-| 4️⃣ Send to Elastic|
-+-------------------+
-         ↓
-+---------------------+
-| 5️⃣ Index & Visualize|
-+---------------------+
-```
-
 
 ---
 
- **📦 Bonus: Enable Filebeat Service on Boot**
+ **📦 Optional: Enable Filebeat Service on Boot**
 ```bash
 sudo systemctl enable filebeat
 ```
+# 📄 Filebeat Configuration Architecture
+
+Here’s a **simplified and easy-to-understand text-based architecture** for how Filebeat configuration works:
+
+```
+                   +----------------------+
+                   |    Log Files         |
+                   |  (e.g., access.log)  |
+                   +----------+-----------+
+                              |
+                              v
+                  +------------------------+
+                  | filebeat.inputs        |
+                  | (What to read?)        |
+                  +----------+-------------+
+                              |
+                              v
+         +----------------------------------------+
+         | filebeat.modules (Optional Templates)  |
+         | (e.g., nginx, apache, system logs)     |
+         +----------------+-----------------------+
+                              |
+                              v
+                   +----------------------+
+                   |   Processors         |
+                   | (Add/Remove fields,  |
+                   |  enrich log data)    |
+                   +----------+-----------+
+                              |
+                              v
+        +------------------------------------------+
+        | Outputs (Choose One)                     |
+        | - Elasticsearch                          |
+        | - Logstash                               |
+        | - Kafka                                   |
+        | - Redis                                   |
+        | - File / Console                          |
+        +----------------+-------------------------+
+                              |
+                              v
+               +-----------------------------+
+               | Final Destination / Kibana  |
+               | (Search, Analyze, Visualize)|
+               +-----------------------------+
+```
+
+### 💡 Key Concepts:
+
+- **Inputs** → What logs Filebeat reads.
+- **Modules** → Prebuilt configs for common services.
+- **Processors** → Clean or enrich logs.
+- **Output** → Where logs are sent.
+- **Kibana** → View and analyze the logs.
+
+-
+
+ Here's a **clear and structured breakdown** of the **input types** and **output types** in Filebeat, along with how to configure them in `filebeat.yml`: 
+
+-
+
+## 📝 Filebeat Input Types 
+
+These define **where Filebeat reads data from**
+
+
+
+### ✅ Common Input Types:
+
+| Input Type | Description |
+|------------|-------------|
+| `log` | Reads log files line by line (most common use) |
+| `stdin` | Reads from standard input (e.g., for testing) |
+| `container` | Collects logs from container log files |
+| `docker` | Collects logs from Docker JSON logs |
+| `kafka` | Reads messages from a Kafka topic |
+| `http_endpoint` | Accepts logs via HTTP POST (experimental) |
+
+### 🧾 Example Configuration:
+
+```yaml
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/syslog
+      - /var/log/auth.log
+```
+
+For container logs:
+
+```yaml
+filebeat.inputs:
+  - type: container
+    paths:
+      - /var/lib/docker/containers/*/*.log
+```
 
 ---
 
-## 🔄 Filebeat Output Types Explained
+## 🚀 Filebeat Output Types (`output.*`)
 
-Filebeat supports multiple output types. Each type sends the processed log data to a different backend or service.
-```
-+-------------------------+    +-----------------------+    +-----------------------+    +-----------------------+
-| 1️⃣ Elasticsearch Output | →  | 2️⃣ Logstash Output    | →  | 3️⃣ Kafka Output       | →  | 4️⃣ Redis Output       |
-+-------------------------+    +-----------------------+    +-----------------------+    +-----------------------+
-           ↓                           ↓                         
-+-------------------------+    +-----------------------+    
-| 5️⃣ Console Output       | →  | 6️⃣ File Output        |
-+-------------------------+    +-----------------------+
-```
+These define **where Filebeat sends data** after collecting and processing it.
 
-### ✅ 1. Elasticsearch Output
-Most commonly used with the Elastic Stack.
+### ✅ Supported Output Types:
+
+| Output Type | Description |
+|-------------|-------------|
+| `elasticsearch` | Sends logs directly to Elasticsearch |
+| `logstash` | Sends logs to Logstash for further processing |
+| `kafka` | Publishes logs to Kafka topics |
+| `redis` | Sends logs to Redis queues |
+| `file` | Writes logs to a file on disk |
+| `console` | Prints logs to the console (useful for debugging) |
+| `cloud` | Sends logs to Elastic Cloud |
+| `opensearch` | Sends logs to an OpenSearch cluster |
+
+---
+
+### 📦 Output Configuration Examples:
+
+#### Elasticsearch Output:
+
 ```yaml
 output.elasticsearch:
   hosts: ["http://localhost:9200"]
-  username: "elastic"
-  password: "yourpassword"
 ```
 
-**Use when:**
-- You want to index logs directly in Elasticsearch.
-- You plan to visualize logs in Kibana.
+#### Logstash Output:
 
-### 🛠️ 2. Logstash Output
-Use this if you want to process logs using Logstash before indexing into Elasticsearch.
 ```yaml
 output.logstash:
   hosts: ["localhost:5044"]
 ```
 
-**Use when:**
-- You need complex parsing or filtering.
-- You want to buffer or route logs before Elasticsearch.
+#### Kafka Output:
 
-### 💬 3. Kafka Output
-Useful for sending logs to Apache Kafka for distributed processing.
 ```yaml
 output.kafka:
-  hosts: ["kafka-broker1:9092"]
-  topic: "logs"
+  hosts: ["localhost:9092"]
+  topic: "filebeat"
 ```
 
-**Use when:**
-- You're working in a microservices environment.
-- You need log streaming or queuing.
+#### Redis Output:
 
-### 🔗 4. Redis Output
-Sends logs to Redis queues.
 ```yaml
 output.redis:
   hosts: ["localhost"]
   key: "filebeat"
 ```
 
-**Use when:**
-- You want to temporarily store logs in memory.
-- You're building custom log consumers.
+#### File Output (for local file storage):
 
-### 📬 5. Console Output (for testing/debug)
-Prints logs to the terminal instead of sending them anywhere.
+```yaml
+output.file:
+  path: "/tmp/filebeat"
+  filename: "output.log"
+```
+
+#### Console Output (for testing/debugging):
+
 ```yaml
 output.console:
   pretty: true
 ```
 
-**Use when:**
-- You're debugging your configuration.
-- You want to see output locally.
-
-### 📁 6. File Output
-Writes logs to a local file.
-```yaml
-output.file:
-  path: "/tmp/filebeat"
-  filename: "filebeat"
-```
-
-**Use when:**
-- You're testing or archiving logs.
-- You want a local copy of the structured logs.
-
 ---
 
-## 📤 Switching Outputs
+### 🧠 Tip:
 
-You can only use one output at a time in `filebeat.yml`. So, make sure to comment out all others:
-
-```yaml
-# output.elasticsearch:
-#   hosts: ["http://localhost:9200"]
-
-output.logstash:
-  hosts: ["localhost:5044"]
-```
+Only **one output** can be active at a time in Filebeat. If you want to send logs to multiple destinations (e.g., Elasticsearch and Kafka), you’ll need to use **Logstash** as a middle layer or run **multiple Filebeat instances**.
 
 ---
-
-## 📘 Reference: All Output Types
-
-| Output Type     | Description                                     |
-|-----------------|-------------------------------------------------|
-| **elasticsearch** | Default for Elastic Stack                      |
-| **logstash**      | For complex pipelines & filtering              |
-| **kafka**         | For message queue-based architectures          |
-| **redis**         | Lightweight in-memory buffering                |
-| **console**       | For debugging/log viewing locally              |
-| **file**          | For saving logs to disk                        |
-
----
-
-## 📦 Example: Switching from Elasticsearch to Logstash
-
-Before (default):
-```yaml
-output.elasticsearch:
-  hosts: ["http://localhost:9200"]
-```
-
-After (with Logstash):
-```yaml
-# output.elasticsearch:
-#   hosts: ["http://localhost:9200"]
-
-output.logstash:
-  hosts: ["localhost:5044"]
-```
-
-```
-
-
-# output.elasticsearch:
-#   hosts: ["http://localhost:9200"]
-
-output.logstash:
-  hosts: ["localhost:5044"]
-Would you like a GitHub README or config file showing each output as a switchable config block? I can prepare that for you too.
