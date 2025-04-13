@@ -3,6 +3,31 @@ filebeat.inputs:
     enabled: true
     paths:
       - /var/log/nginx/access.log
+    processors:
+      - dissect:
+          tokenizer: "%{nginx.client.ip} - %{nginx.user} [%{nginx.timestamp}] \"%{nginx.request.method} %{nginx.request.url} HTTP/%{nginx.request.http}\" %{nginx.response.status} %{nginx.bytes}"
+          field: "message"
+          target_prefix: "nginx"
+      - add_fields:
+          target: ''
+          fields:
+            service: nginx
+            log_type: access
+
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/haproxy.log
+    processors:
+      - dissect:
+          tokenizer: "%{client.ip}:%{client.port} [%{haproxy.timestamp}] %{frontend} %{backend}/%{server} %{Tq}/%{Tw}/%{Tc}/%{Tr}/%{Tt} %{response.status} %{bytes} %{request_cookie} %{response_cookie} %{termination_state} %{actconn}/%{feconn}/%{beconn}/%{srv_conn}/%{retries} %{srv_queue}/%{backend_queue} \"%{request}\""
+          field: "message"
+          target_prefix: "haproxy"
+      - add_fields:
+          target: ''
+          fields:
+            service: haproxy
+            log_type: access
 
 output.elasticsearch:
   hosts: ["http://localhost:9200"]
@@ -17,11 +42,3 @@ logging.files:
   name: filebeat.log
   keepfiles: 7
   permissions: 0644
-
-processors:
-  - dissect:
-      tokenizer: "%{nginx.client.ip} - %{nginx.user} [%{nginx.timestamp}] \"%{nginx.request.method} %{nginx.request.url} HTTP/%{nginx.request.http}\" %{nginx.response.status} %{nginx>
-      field: "message"
-      target_prefix: "nginx"
-
-# Include other necessary processors or fields based on your setup
