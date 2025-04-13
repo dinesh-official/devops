@@ -746,6 +746,6 @@ filebeat.inputs:
 - Each input has its **own processors**
 - Clean and modular routing of log data
 
-Would you like this exported as an image or Markdown for documentation?
+
 
 
