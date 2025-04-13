@@ -741,47 +741,7 @@ You might have:
 - Logs that need **specific enrichment**
 - A need to **drop or modify** certain fields only for one input
 
----
 
-***🛠️ Example Configuration***
-
-```yaml
-filebeat.inputs:
-  - type: log
-    enabled: true
-    paths:
-      - /var/log/nginx/access.log
-    processors:
-      - add_fields:
-          target: ''
-          fields:
-            service: nginx
-            log_type: access
-
-  - type: log
-    enabled: true
-    paths:
-      - /var/log/mysql/mysql.log
-    processors:
-      - add_fields:
-          target: ''
-          fields:
-            service: mysql
-            log_type: database
-```
-
-***🔎 What This Does:***
-
-- For **nginx logs**, Filebeat adds `service: nginx` and `log_type: access`
-- For **MySQL logs**, Filebeat adds `service: mysql` and `log_type: database`
-
-
-
-***✅ Benefits***
-
-- Keeps processing logic **modular**
-- Avoids affecting unrelated logs
-- Makes your pipeline **cleaner and easier to debug**
 
 ### Architecture Processors under specific inputs :
 
