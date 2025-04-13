@@ -524,5 +524,192 @@ processors:
 - Use `decode_json_fields` if your logs have nested JSON.
 - Always test processor logic before production rollout.
 
+Great question! Let’s break down what it means to use **processors under a specific input** in Filebeat:
+
 ---
+
+## 🎯 What Does “Under a Specific Input” Mean?
+
+In Filebeat, you can define **multiple inputs**, each watching different log files or directories.
+
+Placing processors **under a specific input** means the processor will only apply to **logs collected by that input**, not globally to all logs.
+
+---
+
+***🔍 Why Use This?Great question! Let’s break down what it means to use **processors under a specific input** in Filebeat:
+
+---
+
+## 🎯 What Does “Under a Specific Input” Mean?
+
+In Filebeat, you can define **multiple inputs**, each watching different log files or directories.
+
+Placing processors **under a specific input** means the processor will only apply to **logs collected by that input**, not globally to all logs.
+
+---
+
+### 🔍 Why Use This?
+
+You might have:
+- **Different logs** with different formats
+- Logs that need **specific enrichment**
+- A need to **drop or modify** certain fields only for one input
+
+---
+
+## 🛠️ Example Configuration
+
+```yaml
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/nginx/access.log
+    processors:
+      - add_fields:
+          target: ''
+          fields:
+            service: nginx
+            log_type: access
+
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/mysql/mysql.log
+    processors:
+      - add_fields:
+          target: ''
+          fields:
+            service: mysql
+            log_type: database
+```
+
+### 🔎 What This Does:
+
+- For **nginx logs**, Filebeat adds `service: nginx` and `log_type: access`
+- For **MySQL logs**, Filebeat adds `service: mysql` and `log_type: database`
+
+---
+
+## ✅ Benefits
+
+- Keeps processing logic **modular**
+- Avoids affecting unrelated logs
+- Makes your pipeline **cleaner and easier to debug**
+
+---
+
+Would you like a visual representation of this setup in your architecture diagram?Great question! Let’s break down what it means to use **processors under a specific input** in Filebeat:
+
+---
+
+## 🎯 What Does “Under a Specific Input” Mean?
+
+In Filebeat, you can define **multiple inputs**, each watching different log files or directories.
+
+Placing processors **under a specific input** means the processor will only apply to **logs collected by that input**, not globally to all logs.
+
+---
+
+***🔍 Why Use This?***
+
+You might have:
+- **Different logs** with different formats
+- Logs that need **specific enrichment**
+- A need to **drop or modify** certain fields only for one input
+
+---
+
+***🛠️ Example Configuration***
+
+```yaml
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/nginx/access.log
+    processors:
+      - add_fields:
+          target: ''
+          fields:
+            service: nginx
+            log_type: access
+
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/mysql/mysql.log
+    processors:
+      - add_fields:
+          target: ''
+          fields:
+            service: mysql
+            log_type: database
+```
+
+***🔎 What This Does:***
+
+- For **nginx logs**, Filebeat adds `service: nginx` and `log_type: access`
+- For **MySQL logs**, Filebeat adds `service: mysql` and `log_type: database`
+
+---
+
+***✅ Benefits***
+
+- Keeps processing logic **modular**
+- Avoids affecting unrelated logs
+- Makes your pipeline **cleaner and easier to debug**
+
+---
+
+Would you like a visual representation of this setup in your architecture diagram?
+
+You might have:
+- **Different logs** with different formats
+- Logs that need **specific enrichment**
+- A need to **drop or modify** certain fields only for one input
+
+---
+
+***🛠️ Example Configuration***
+
+```yaml
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/nginx/access.log
+    processors:
+      - add_fields:
+          target: ''
+          fields:
+            service: nginx
+            log_type: access
+
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/mysql/mysql.log
+    processors:
+      - add_fields:
+          target: ''
+          fields:
+            service: mysql
+            log_type: database
+```
+
+***🔎 What This Does:***
+
+- For **nginx logs**, Filebeat adds `service: nginx` and `log_type: access`
+- For **MySQL logs**, Filebeat adds `service: mysql` and `log_type: database`
+
+
+
+***✅ Benefits***
+
+- Keeps processing logic **modular**
+- Avoids affecting unrelated logs
+- Makes your pipeline **cleaner and easier to debug**
+
+
 
