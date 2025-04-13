@@ -779,5 +779,85 @@ You might have:
 - Clean and modular routing of log data
 
 
+# Grok Filters in Filebeat
+
+To implement **Grok filters** in Filebeat, you would typically use **processors** to parse and extract structured data from unstructured log data. Grok is a tool for pattern matching that allows you to define custom patterns for parsing logs. In Filebeat, Grok filters can be implemented by using the **grok processor** to process logs before they are sent to an output.
+
+### Step-by-Step Implementation of Grok Filters in Filebeat
+
+#### 1. **Define Grok Patterns**
+First, you can either use built-in Grok patterns (like `COMMONAPACHELOG`, `COMBINEDAPACHELOG`, etc.) or define custom patterns to match the log structure.
+
+#### 2. **Add the Grok Processor in Filebeat Configuration**
+
+You will add the **grok processor** inside the `filebeat.inputs` section. This tells Filebeat to parse the log data using a specified Grok pattern.
+
+Here's an example configuration for using Grok filters in Filebeat:
+
+### Example Configuration for Grok Filter
+
+```yaml
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/apache2/access.log
+    processors:
+      - grok:
+          patterns:
+            - '%{COMMONAPACHELOG}'
+          overwrite_keys: true  # Overwrite existing keys with new ones from Grok
+          field: message  # Field to process (log line)
+          
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/mysql/mysql.log
+    processors:
+      - grok:
+          patterns:
+            - '%{MYSQL_ERROR_LOG}'  # Custom pattern for MySQL logs
+          field: message
+```
+
+#### Explanation:
+
+1. **`filebeat.inputs`**: Defines the log sources Filebeat is monitoring.
+   - `paths`: Specifies the location of your logs.
+   - `processors`: Defines the processing steps applied to the logs.
+
+2. **Grok Processor**:
+   - `patterns`: Specifies the Grok patterns you want to apply (e.g., `COMMONAPACHELOG` for Apache logs or `MYSQL_ERROR_LOG` for MySQL logs).
+   - `field`: Specifies the field that contains the unstructured log data (usually `message`).
+   - `overwrite_keys`: Set to `true` to overwrite any existing fields with the Grok output.
+
+#### 3. **Custom Patterns**
+You can define custom Grok patterns by adding them under the `patterns` section:
+
+```yaml
+processors:
+  - grok:
+      patterns:
+        - '%{CUSTOM_PATTERN}'
+      custom_patterns: |
+        # Define custom Grok patterns
+        CUSTOM_PATTERN %{IPV4:client_ip} %{WORD:method} %{URIPATHPARAM:request} %{NUMBER:response_code} %{NUMBER:bytes_sent}
+```
+
+This example creates a custom Grok pattern for logs with client IP, HTTP method, request path, response code, and bytes sent.
+
+### 4. **Verify Your Configuration**
+
+Once you've added the Grok processor to your Filebeat configuration file, you can run Filebeat to process the logs, and the parsed output will be forwarded to Elasticsearch or your defined output.
+
+### Benefits of Using Grok Filters in Filebeat:
+
+- **Extract meaningful data** from unstructured logs (like IP addresses, response codes, etc.).
+- **Enrich your logs** with useful fields, making it easier to search and visualize data in Kibana.
+- **Customizable**: You can create specific patterns for different log formats (e.g., Apache, MySQL, etc.).
+
+### Conclusion:
+By adding Grok processors to Filebeat, you can transform unstructured log data into structured fields, enabling better log analysis and visualization. You can either use predefined Grok patterns or create your own custom patterns for different log formats.
+
 
 
