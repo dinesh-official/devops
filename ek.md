@@ -219,9 +219,7 @@ sudo systemctl enable filebeat
 
 You should now be able to see logs flowing into Kibana from Filebeat.
 
-### know more
-
-Explore the detailed setup and configurations in my GitHub [Filebeat Guide](https://github.com/dinesh-official/devops/blob/main/filebeat.md).
-
+**Learn more**  
+Dive deeper into the detailed setup and configurations in my [Filebeat Guide on GitHub](https://github.com/dinesh-official/devops/blob/main/filebeat.md).
 
 
