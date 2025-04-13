@@ -430,3 +430,102 @@ Each module typically includes:
 
 ---
 
+Absolutely! Let’s dive into **Processors** in Filebeat and how you can use them effectively:
+
+---
+
+## 🧠 Filebeat Processors – Clean, Enrich & Customize Logs
+
+***✅ What Are Processors?***
+
+**Processors** in Filebeat are used to **modify, enrich, or filter log events** before they are sent to the output (like Elasticsearch or Logstash).
+
+They run **after input and modules** have captured the logs, but **before the data is shipped**.
+
+---
+
+***🔧 Common Use Cases***
+
+- Add fields like environment, region, hostname
+- Remove sensitive or unnecessary fields
+- Rename fields for consistency
+- Drop events that match a condition
+- Decode fields (e.g., base64, JSON)
+
+---
+
+***📘 Basic Processor Types***
+
+| Processor           | Purpose                                  |
+|---------------------|------------------------------------------|
+| `add_fields`        | Add custom fields to events              |
+| `drop_fields`       | Remove unwanted fields                   |
+| `drop_event`        | Drop an entire event based on condition  |
+| `rename`            | Rename fields                            |
+| `include_fields`    | Only keep specific fields                |
+| `decode_json_fields`| Parse embedded JSON in a field           |
+
+---
+
+***🛠️ How to Use Processors***
+
+Processors go inside your `filebeat.yml` under the input or globally.
+
+***🔹 Example 1: Add a field to all events***
+
+```yaml
+processors:
+  - add_fields:
+      target: ''
+      fields:
+        environment: production
+        region: ap-south-1
+```
+
+***🔹 Example 2: Remove unwanted fields***
+
+```yaml
+processors:
+  - drop_fields:
+      fields: ["host", "agent", "input", "ecs"]
+```
+
+***🔹 Example 3: Drop events from localhost***
+
+```yaml
+processors:
+  - drop_event:
+      when:
+        equals:
+          source.ip: "127.0.0.1"
+```
+
+***🔹 Example 4: Decode embedded JSON***
+
+```yaml
+processors:
+  - decode_json_fields:
+      fields: ["message"]
+      target: "json"
+      overwrite_keys: true
+```
+
+---
+
+## 🌐 Where to Place Processors?
+
+- **Globally**: Apply to all inputs.
+- **Under a specific input**: Only for that input block.
+- **In modules**: Advanced customization (less common).
+
+---
+
+***✅ Best Practices***
+
+- Keep processors minimal for performance.
+- Use `drop_event` to reduce unnecessary indexing.
+- Use `decode_json_fields` if your logs have nested JSON.
+- Always test processor logic before production rollout.
+
+---
+
