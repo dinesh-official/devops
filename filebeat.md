@@ -624,6 +624,59 @@ processors:
 Great question! Let’s break down what it means to use **processors under a specific input** in Filebeat:
 
 ---
+Here’s a simplified explanation of **global processors** in Filebeat:
+
+---
+
+## Global Processors
+
+- **Global processors** apply to **all logs** processed by Filebeat, no matter where they come from.
+- They are defined outside the individual log input blocks and affect every log that Filebeat collects.
+
+---
+
+***How to Use Global Processors***
+
+In your `filebeat.yml` file, you can set global processors like this:
+
+```yaml
+processors:
+  - add_fields:
+      target: ''
+      fields:
+        environment: production
+        app_version: 1.0.0
+  - drop_event:
+      when:
+        equals:
+          log.level: "debug"
+
+filebeat.inputs:
+  - type: log
+    paths:
+      - /var/log/*/*.log
+```
+
+---
+
+***What Happens in This Example?***
+
+1. **`add_fields`**: Adds `environment: production` and `app_version: 1.0.0` to **all logs**.
+2. **`drop_event`**: Drops any logs where the `log.level` is "debug".
+
+---
+
+***Why Use Global Processors?***
+
+- Apply **consistent changes** across all logs (e.g., adding tags or dropping certain logs).
+- **Avoid repetition** in input-specific configurations.
+- **Simplify** your configuration when processing logs in bulk.
+
+---
+
+This setup means **every log Filebeat collects** will have the same enrichment (like `environment` and `app_version` fields), and unnecessary logs (like debug logs) will be filtered out globally.
+
+---
 ## Under a Specific Input
 ***🎯 What Does “Under a Specific Input” Mean?***
 
