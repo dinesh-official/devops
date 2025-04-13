@@ -16,7 +16,8 @@ filebeat.inputs:
           fields:
             service: nginx
             log_type: access
-            
+
+# {            
 # Get input from HAProxy
   - type: log
     enabled: true
@@ -33,6 +34,7 @@ filebeat.inputs:
           fields:
             service: haproxy
             log_type: access
+# }
 
 # Output 
 output.elasticsearch:
