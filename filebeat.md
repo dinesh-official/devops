@@ -711,5 +711,41 @@ filebeat.inputs:
 - Avoids affecting unrelated logs
 - Makes your pipeline **cleaner and easier to debug**
 
+## Here's a **visual representation** of how **processors under specific inputs** work in Filebeat:
+
+```
+                                +-------------------------------+
+                                |         filebeat.inputs       |
+                                +-------------------------------+
+                                         /             \
+                                        /               \
+                                       v                 v
+                      +-----------------------+   +-------------------------+
+                      |  Input: nginx logs    |   |  Input: MySQL logs      |
+                      |  /var/log/nginx/...   |   |  /var/log/mysql/...     |
+                      +----------+------------+   +------------+------------+
+                                 |                             |
+                                 v                             v
+                   +---------------------------+   +---------------------------+
+                   |  Processor (add_fields)   |   |  Processor (add_fields)   |
+                   |  service: nginx           |   |  service: mysql           |
+                   |  log_type: access         |   |  log_type: database       |
+                   +-------------+-------------+   +-------------+-------------+
+                                 |                             |
+                                 v                             v
+                          +--------------+             +---------------+
+                          |   Output     |             |    Output     |
+                          +--------------+             +---------------+
+                                 |                             |
+                                 v                             v
+                         Elasticsearch / Logstash / Kafka / etc.
+```
+
+### 🧠 This diagram shows:
+- Separate inputs for different logs
+- Each input has its **own processors**
+- Clean and modular routing of log data
+
+Would you like this exported as an image or Markdown for documentation?
 
 
