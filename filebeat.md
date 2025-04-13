@@ -254,6 +254,7 @@ Here’s a **simplified and easy-to-understand text-based architecture** for how
  Here's a **clear and structured breakdown** of the **input types** and **output types** in Filebeat, along with how to configure them in `filebeat.yml`: 
 
 -
+# Filebeat Input
 
 ## 📝 Filebeat Input Types 
 
@@ -293,6 +294,7 @@ filebeat.inputs:
 ```
 
 ---
+#  Filebeat Output
 
 ## 🚀 Filebeat Output Types 
 
