@@ -430,9 +430,6 @@ Each module typically includes:
 
 ---
 
-Absolutely! Let’s dive into **Processors** in Filebeat and how you can use them effectively:
-
----
 
 ## 🧠 Filebeat Processors – Clean, Enrich & Customize Logs
 
