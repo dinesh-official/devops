@@ -221,7 +221,7 @@ You should now be able to see logs flowing into Kibana from Filebeat.
 
 ***Also refer this :***
 
-If you want to know more about Filebeat, check out the [Filebeat documentation](https://www.elastic.co/guide/en/beats/filebeat/current/index.html) or explore the detailed setup and configurations in my GitHub [Filebeat Guide](https://github.com/dinesh-official/devops/blob/main/filebeat.md).
+If you want to know more about Filebeat, explore the detailed setup and configurations in my GitHub [Filebeat Guide](https://github.com/dinesh-official/devops/blob/main/filebeat.md).
 
 
 
