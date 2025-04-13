@@ -731,7 +731,7 @@ filebeat.inputs:
 - Avoids affecting unrelated logs
 - Makes your pipeline **cleaner and easier to debug**
 
-## Here's a **visual representation** of how **processors under specific inputs** work in Filebeat:
+## Arichiture of under specific inputs :
 
 ```
                                 +-------------------------------+
