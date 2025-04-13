@@ -524,7 +524,7 @@ Each module typically includes:
 - ✅ Comes with dashboards to visualize data instantly
 
 ---
-
+ # Filebeat Processors
 
 ## 🧠 Filebeat Processors – Clean, Enrich & Customize Logs
 
