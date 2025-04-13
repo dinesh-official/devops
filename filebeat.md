@@ -229,9 +229,9 @@ Here’s a **simplified and easy-to-understand text-based architecture** for how
         | Outputs (Choose One)                     |
         | - Elasticsearch                          |
         | - Logstash                               |
-        | - Kafka                                   |
-        | - Redis                                   |
-        | - File / Console                          |
+        | - Kafka                                  |
+        | - Redis                                  |
+        | - File / Console                         |
         +----------------+-------------------------+
                               |
                               v
