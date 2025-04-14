@@ -1,6 +1,4 @@
 
----
-
 ### ✅ **Must-Have for ntopng Installation**
 
 1. **`apt-ntop.deb`**
@@ -17,22 +15,6 @@
    sudo apt install ntopng
    ```
 
-
-### ✅ **Summary: Steps for Ubuntu 22.04 ntopng Install**
-
-```bash
-# 1. Download the ntop repo installer
-wget https://packages.ntop.org/apt/22.04/all/apt-ntop.deb
-
-# 2. Install it
-sudo apt install ./apt-ntop.deb
-
-# 3. Update package list
-sudo apt update
-
-# 4. Install ntopng
-sudo apt install ntopng
-```
 
 ---
 
