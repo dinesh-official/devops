@@ -34,4 +34,6 @@ sudo apt install -y clickhouse-server clickhouse-client
 sudo service clickhouse-server start
 
 
+https://phoenixnap.com/kb/install-clickhouse-on-ubuntu
+
 
