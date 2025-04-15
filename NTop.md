@@ -25,13 +25,17 @@ sudo systemctl start ntopng
 
 ClickHouse for storage
 ---------------------
-sudo apt update
-sudo apt install -y apt-transport-https ca-certificates dirmngr
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
+# Add repository
+sudo apt-get install -y apt-transport-https ca-certificates dirmngr
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E0C56BD4
 echo "deb https://packages.clickhouse.com/deb stable main" | sudo tee /etc/apt/sources.list.d/clickhouse.list
-sudo apt update
-sudo apt install -y clickhouse-server clickhouse-client
-sudo service clickhouse-server start
+sudo apt-get update
+
+# Install
+sudo apt-get install -y clickhouse-server clickhouse-client
+
+# Start service
+sudo systemctl enable --now clickhouse-server
 
 
 https://phoenixnap.com/kb/install-clickhouse-on-ubuntu
