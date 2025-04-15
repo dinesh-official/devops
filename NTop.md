@@ -25,6 +25,7 @@ sudo systemctl start ntopng
 
 ClickHouse for storage
 ---------------------
+```
 # Add repository
 sudo apt-get install -y apt-transport-https ca-certificates dirmngr
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E0C56BD4
@@ -36,6 +37,7 @@ sudo apt-get install -y clickhouse-server clickhouse-client
 
 # Start service
 sudo systemctl enable --now clickhouse-server
+```
 
 
 https://phoenixnap.com/kb/install-clickhouse-on-ubuntu
