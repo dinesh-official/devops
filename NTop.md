@@ -18,7 +18,7 @@
 
 ---
 
-if you want to add:
+
 - MariaDB or ClickHouse for storage
 - GeoIP for location-based traffic
 - SSL for the web interface
