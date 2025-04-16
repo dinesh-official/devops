@@ -152,3 +152,46 @@ root@e2e-80-112:~# history
    57  history
 root@e2e-80-112:~# 
 ```
+
+
+
+insode this file path sudo nano /etc/rsyslog.d/49-haproxy.conf
+```
+$ModLoad imudp
+$UDPServerRun 514
+$AddUnixListenSocket /var/lib/haproxy/dev/log
+
+:programname, startswith, "haproxy" {
+  /var/log/haproxy.log
+  stop
+}
+
+
+
+if ($programname == 'haproxy') then /var/log/haproxy.log
+& stop
+```
+
+inside this path sudo nano /etc/haproxy/haproxy.cfg
+
+```
+global
+    log /dev/log    local0      # Use the local0 facility for logs
+    daemon           # Run HAProxy as a daemon in the background
+
+defaults
+    log     global     # Use global logging settings defined above
+    mode    http       # HTTP mode to handle web traffic
+    option  httplog    # Enable HTTP log format
+    timeout connect 5000  # Timeout for connection attempts (in milliseconds)
+    timeout client  50000  # Timeout for client-side connections
+    timeout server  50000  # Timeout for server-side connections
+
+frontend http_front
+    bind *:80           # Bind to port 80 (HTTP)
+    default_backend http_back  # Default backend to use
+
+backend http_back
+    balance roundrobin  # Load balancing algorithm (round-robin)
+    server web1 164.52.218.114:80 check  # Backend server with health check
+```
