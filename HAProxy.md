@@ -90,4 +90,65 @@ balance url_param sessionid
 
 ---
 
-If you're working on a specific project, I can suggest which one is best for your use case. Want to go into sticky sessions next?
+list of use comands 
+```
+root@e2e-80-112:~# history
+    1  sudo apt update && sudo apt upgrade -y
+    2  curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elastic.gpg
+    3  echo "deb [signed-by=/usr/share/keyrings/elastic.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+    4  sudo apt update
+    5  sudo apt install elasticsearch
+    6  sudo kill -9 2459
+    7  sudo rm /var/lib/dpkg/lock-frontend
+    8  sudo rm /var/cache/apt/archives/lock
+    9  sudo dpkg --configure -a
+   10  sudo kill -9 2459
+   11  sudo rm /var/lib/dpkg/lock-frontend
+   12  sudo rm /var/cache/apt/archives/lock
+   13  sudo dpkg --configure -a
+   14  sudo apt install elasticsearch
+   15  echo -e "network.host: 0.0.0.0\ndiscovery.type: single-node" | sudo tee -a /etc/elasticsearch/elasticsearch.yml
+   16  sudo systemctl start elasticsearch
+   17  sudo systemctl enable elasticsearch
+   18  curl -X GET "localhost:9200"
+   19  sudo apt install kibana
+   20  sudo systemctl enable kibana
+   21  sudo systemctl start kibana
+   22  sudo apt install nginx -y
+   23  sudo nano /etc/nginx/sites-available/your_domain
+   24  sudo sed -i 's|#\?server.host:.*|server.host: "0.0.0.0"|' /etc/kibana/kibana.yml
+   25  sudo systemctl restart kibana
+   26  sudo ufw allow 5601/tcp && sudo ufw reload
+   27  sudo systemctl enable kibana
+   28  sudo nginx -t && sudo systemctl restart nginx
+   29  sudo apt install filebeat
+   30  sudo nano /etc/filebeat/filebeat.yml
+   31  sudo filebeat modules enable system
+   32  sudo filebeat setup --pipelines --modules system
+   33  sudo filebeat setup --index-management -E output.elasticsearch.enabled=true -E 'output.elasticsearch.hosts=["localhost:9200"]'
+   34  sudo filebeat setup -E output.elasticsearch.enabled=true -E 'output.elasticsearch.hosts=["localhost:9200"]' -E setup.kibana.host=localhost:5601
+   35  sudo nano /etc/filebeat/filebeat.yml
+   36  tail -f /var/log/haproxy.log
+   37  sudo apt install haproxy
+   38  tail -f /var/log/haproxy.log
+   39  sudo apt update
+   40  sudo apt install haproxy
+   41  haproxy -v
+   42  sudo nano /etc/haproxy/haproxy.cfg
+   43  sudo nano /etc/haproxy/haproxy.cfg
+   44  sudo systemctl restart haproxy
+   45  sudo systemctl status haproxy.service
+   46  sudo journalctl -xeu haproxy.service
+   47  nano /var/log/haproxy.log
+   48  cat /var/log/haproxy.log
+   49  sudo apt update
+   50  sudo apt install haproxy -y
+   51  haproxy -v
+   52  sudo nano /etc/haproxy/haproxy.cfg
+   53  sudo systemctl restart haproxy
+   54  sudo systemctl enable haproxy
+   55  sudo nano /etc/rsyslog.d/49-haproxy.conf
+   56  sudo systemctl restart rsyslog
+   57  history
+root@e2e-80-112:~# 
+```
