@@ -1,0 +1,35 @@
+sudo systemctl start mysqld
+sudo systemctl enable mysqld
+sudo grep 'temporary password' /var/log/mysqld.log
+mysql -u root -p'8COHUJt0(hSi'
+eWdFj(Xg:4RX12e
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'eWdFj(Xg:4RX12e';
+FLUSH PRIVILEGES;
+CREATE DATABASE opennebulanew;
+CREATE USER 'oneadmin' IDENTIFIED BY 'eWdFj(Xg:4RX12e';
+GRANT ALL PRIVILEGES ON opennebulanew.* TO 'oneadmin'@'%';
+FLUSH PRIVILEGES;
+EXIT;
+yum -y install opennebula opennebula-sunstone opennebula-gate opennebula-flow
+yum install httpd httpd-tools mod_ssl mod_passenger memcached -y 
+scp -r main_makeup/one/* root@10.10.21.92:/etc/one/
+ scp -r main_makeup/httpd/* root@10.10.21.92:/etc/httpd/
+  scp -r /var/lib/one/remotes/* root@10.10.21.92:/var/lib/one/remotes/
+ scp -r /etc/my.cnf root@10.10.21.92:/etc/my.cnf
+vi /usr/share/one/pre_cleanup
+#!/usr/bin/bash
+if [[ ! -f /var/run/one/oned.pid && -f /var/lock/one/one ]]; then
+    rm /var/lock/one/one
+fi
+chmod +x /usr/share/one/pre_cleanup
+sudo chown -R oneadmin:oneadmin /var/run/one
+sudo chmod -R 755 /var/run/one
+tail -f /var/log/one/oned.log
+cat /var/lib/one/.one/one_auth 
+chown -R oneadmin:oneadmin /var/lib/one /var/log/one /etc/one /var/run/one 
+chmod -R 755 /var/lib/one /var/log/one /etc/one /var/run/one  
+ mv ssl.conf /root
+ ls -ld /var/run/one/ssh-socks
+sudo chown oneadmin:oneadmin /var/run/one/ssh-socks
+systemctl restart opennebula opennebula-sunstone
+setsebool -P httpd_can_network_connect 1
