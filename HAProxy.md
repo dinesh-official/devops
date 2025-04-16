@@ -195,3 +195,9 @@ backend http_back
     balance roundrobin  # Load balancing algorithm (round-robin)
     server web1 164.52.218.114:80 check  # Backend server with health check
 ```
+
+To Check live logs copy this command 
+```
+tail -f /var/log/haproxy.log
+
+```
