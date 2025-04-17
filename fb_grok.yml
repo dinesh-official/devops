@@ -1,0 +1,33 @@
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/haproxy.log
+    fields_under_root: true
+    processors:
+      - grok:
+          field: "message"
+          patterns:
+            - '^%{SYSLOGTIMESTAMP:syslog_timestamp} %{HOSTNAME:host} %{WORD:process_name}\[%{NUMBER:pid}\]: %{IP:source_ip}:%{NUMBER:source_port} \[%{HTTPDATE:accept_date}\] %{WORD:frontend} %{NOTSPACE:backend}/%{NOTSPACE:server} %{NUMBER>
+          ignore_failure: false
+
+# Output to Elasticsearch
+output.elasticsearch:
+  hosts: ["http://localhost:9200"]
+  index: "haproxy-%{+yyyy.MM.dd}"
+
+# Setup template settings
+setup.template.name: "haproxy"
+setup.template.pattern: "haproxy-*"
+
+# Optional: Setup Kibana
+setup.kibana:
+  host: "http://localhost:5601"
+
+# Logging settings
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: /var/log/filebeat
+  name: filebeat.log
+  keepfiles: 7
