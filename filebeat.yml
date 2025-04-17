@@ -1,51 +1,29 @@
 filebeat.inputs:
-# Under a Specific Input for nginx log prashing {        
-  # Get input from nginx
   - type: log
-    enabled: true
-    paths:
-      - /var/log/nginx/access.log
-  # Processors -> pharse the logs into seprate fields
-    processors:
-      - dissect:
-          tokenizer: "%{nginx.client.ip} - %{nginx.user} [%{nginx.timestamp}] \"%{nginx.request.method} %{nginx.request.url} HTTP/%{nginx.request.http}\" %{nginx.response.status} %{nginx.bytes}"
-          field: "message"
-          target_prefix: "nginx"
-      - add_fields:
-          target: ''
-          fields:
-            service: nginx
-            log_type: access
-  # }
-
-
-# Under a Specific Input for haproxy log prashing {            
-  # Get input from HAProxy
-  - type: log
-    enabled: true
     paths:
       - /var/log/haproxy.log
-  # Processors -> pharse the logs into seprate fields
+    fields_under_root: true
     processors:
       - dissect:
-          tokenizer: "%{client.ip}:%{client.port} [%{haproxy.timestamp}] %{frontend} %{backend}/%{server} %{Tq}/%{Tw}/%{Tc}/%{Tr}/%{Tt} %{response.status} %{bytes} %{request_cookie} %{response_cookie} %{termination_state} %{actconn}/%{feconn}/%{beconn}/%{srv_conn}/%{retries} %{srv_queue}/%{backend_queue} \"%{request}\""
+          tokenizer: "%{syslog.timestamp} %{host.name} %{process.name}[%{process.pid}]: %{source_ip}:%{source_port} [%{haproxy.accept_date}] %{haproxy.frontend} %{haproxy.backend}/%{haproxy.server} %{haproxy.Tq}/%{haproxy.Tw}/%{haproxy.Tc>
           field: "message"
-          target_prefix: "haproxy"
-      - add_fields:
-          target: ''
-          fields:
-            service: haproxy
-            log_type: access
-# }
+          target_prefix: "parsed"
 
-# Output 
+
+# Output configuration
 output.elasticsearch:
   hosts: ["http://localhost:9200"]
+  index: "haproxy-%{+yyyy.MM.dd}"  # Custom index name with date pattern
 
-# Optional
+# Setup template settings
+setup.template.name: "haproxy"
+setup.template.pattern: "haproxy-*"
+
+# Optional: Setup Kibana
 setup.kibana:
   host: "http://localhost:5601"
 
+# Logging settings
 logging.level: info
 logging.to_files: true
 logging.files:
