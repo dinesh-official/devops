@@ -1,5 +1,5 @@
 
-# Note after adding this filter conf if you not geting thhe realtime logs you cann refer the "grok" Paten sto get the dynamic prashing For that code -> devops/fb_grok.yml
+# Note after adding this filter conf if you not geting thhe realtime logs you cann refer the "grok" Patten to get the dynamic prashing For that code -> devops/fb_grok.yml
 
 
 filebeat.inputs:
