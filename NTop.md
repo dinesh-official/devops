@@ -77,3 +77,8 @@ TTL first_seen + INTERVAL 30 DAY;
 https://phoenixnap.com/kb/install-clickhouse-on-ubuntu
 
 
+
+refer these
+https://packages.ntop.org/apt-stable/
+https://clickhouse.com/docs/install#install-from-deb-packages
+
