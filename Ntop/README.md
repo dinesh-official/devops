@@ -1,4 +1,4 @@
-## To set up **ntop** with a **ClickHouse** database, you'll need to install **ntopng** (ntop's network traffic analysis tool) and configure it to store data in **ClickHouse**. Here's a step-by-step guide:
+## To set up **ntop** with a **ClickHouse** database
 
 ---
 
