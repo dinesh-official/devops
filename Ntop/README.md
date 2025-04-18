@@ -1,4 +1,4 @@
-# To set up **ntop** with a **ClickHouse** database
+# Set up **NTopng** with a **ClickHouse** database
 
 ---
 
