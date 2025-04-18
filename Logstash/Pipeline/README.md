@@ -161,16 +161,3 @@ Then restart Logstash:
 sudo systemctl restart logstash
 ```
 
----
-
-## 🧪 Tip: Test Grok Parsing
-
-Use:
-```bash
-https://grokdebug.herokuapp.com/
-```
-Paste your log line and pattern to test before applying in config.
-
----
-
-Want me to help you build a custom pipeline config based on the logs you're receiving? Just share a sample log!
