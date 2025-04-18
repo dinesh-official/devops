@@ -1,4 +1,4 @@
-## To set up **ntop** with a **ClickHouse** database
+# To set up **ntop** with a **ClickHouse** database
 
 ---
 
