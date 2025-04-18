@@ -1,4 +1,33 @@
-Got it, Hasan. Let’s go for the most **stable and production-ready version** of ELK stack — compatible, clean, and less error-prone.
+**Text-based architecture** of how the ELK stack works:
+
+```
++-----------------+        +----------------+        +---------------------+
+|  Filebeat       |  --->  |   Logstash     |  --->  |   Elasticsearch     |
+|  (Log Collector)|        | (Data Processor|        | (Data Storage &     |
+|                 |        |   and Filter)  |        |  Search Engine)     |
++-----------------+        +----------------+        +---------------------+
+        |                        |                          |
+        |                        |                          |
+        v                        v                          v
+   +-----------------+   +-------------------+        +-------------------+
+   | Local System    |   | Logstash Pipeline  |        | Elasticsearch     |
+   | (Logs generated)|   | (Data transformation|        | Indexes & Storage |
+   |                 |   | and enrichment)    |        |                   |
+   +-----------------+   +-------------------+        +-------------------+
+                                                                 |
+                                                                 v
+                                                    +---------------------+
+                                                    |       Kibana         |
+                                                    | (Visualize & Query   |
+                                                    |   Data in Elasticsearch)|
+                                                    +---------------------+
+```
+
+### Step-by-step flow:
+1. **Filebeat**: Collects logs from local systems and forwards them to **Logstash**.
+2. **Logstash**: Processes and filters the logs. It can parse, transform, and enrich data.
+3. **Elasticsearch**: Stores the logs and indexes them, making it easier to search and analyze.
+4. **Kibana**: Visualizes the data stored in **Elasticsearch** and provides a user-friendly interface to query and analyze the logs.
 
 ---
 
