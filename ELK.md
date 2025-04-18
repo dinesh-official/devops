@@ -121,6 +121,114 @@ sudo systemctl start logstash
 
 ---
 
+Great! Now let’s move on to **getting logs and sending them to Logstash**.
+
+We’ll use **Filebeat** to forward logs to Logstash, as it’s the most common and lightweight method for sending logs from your system to Logstash for further processing.
+
+### 📝 **Steps for Sending Logs to Logstash using Filebeat**
+
+---
+
+### 🔹 **Step 1: Install Filebeat on Your Ubuntu Server**
+
+1. **Install Filebeat**
+   ```bash
+   sudo apt install -y filebeat=7.17.16
+   ```
+
+---
+
+### 🔹 **Step 2: Configure Filebeat to Forward Logs to Logstash**
+
+1. **Edit Filebeat Config to Use Logstash Output**
+   ```bash
+   sudo nano /etc/filebeat/filebeat.yml
+   ```
+
+2. **Configure Filebeat to Send Logs to Logstash**
+   - Look for the `output.logstash` section and uncomment it:
+     ```yaml
+     output.logstash:
+       # The Logstash hosts
+       hosts: ["localhost:5044"]
+     ```
+
+3. **Configure Logstash Input**
+   In **Logstash**, we need to create an input for Filebeat:
+
+   ```bash
+   sudo nano /etc/logstash/conf.d/filebeat-input.conf
+   ```
+
+   Add the following:
+   ```conf
+   input {
+     beats {
+       port => 5044
+     }
+   }
+
+   output {
+     elasticsearch {
+       hosts => ["http://localhost:9200"]
+       index => "filebeat-%{+YYYY.MM.dd}"
+     }
+     stdout { codec => rubydebug }
+   }
+   ```
+
+---
+
+### 🔹 **Step 3: Start Filebeat and Logstash**
+
+1. **Enable and Start Filebeat**
+   ```bash
+   sudo systemctl enable filebeat
+   sudo systemctl start filebeat
+   ```
+
+2. **Enable and Start Logstash**
+   ```bash
+   sudo systemctl enable logstash
+   sudo systemctl start logstash
+   ```
+
+---
+
+### 🔹 **Step 4: Test Log Forwarding**
+
+To test if Filebeat is sending logs to Logstash:
+
+1. **Check Filebeat Status**
+   ```bash
+   sudo systemctl status filebeat
+   ```
+
+2. **Check Logstash Status**
+   ```bash
+   sudo systemctl status logstash
+   ```
+
+3. **Check Logstash Logs for Incoming Data**
+   ```bash
+   sudo journalctl -u logstash -f
+   ```
+
+4. **Check Elasticsearch Index**
+   Visit Kibana’s **Discover** tab and check for logs under the `filebeat-*` index pattern.
+
+---
+
+### 🔹 **Step 5: Verify Data in Kibana**
+
+1. Open Kibana at `http://<your-ip>:5601`
+2. Go to **Discover** → Select the index pattern you created earlier (`filebeat-*`)
+3. You should now see logs flowing into Elasticsearch!
+
+---
+
+If everything is set up, you should start seeing logs in **Kibana** and **Logstash**. Let me know if you run into any issues or errors!
+
 ## 🎯 Final Step: Create Kibana Index Pattern
 
 1. Visit Kibana at `http://<IP>:5601`
