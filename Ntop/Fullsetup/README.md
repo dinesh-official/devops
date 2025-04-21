@@ -1,4 +1,4 @@
-Perfect! Since your goal is to:
+Since our goal is to:
 
 ✅ Store **all flow data**  
 ✅ Use **ClickHouse** as the backend  
