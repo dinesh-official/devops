@@ -1,0 +1,47 @@
+cat /etc/filebeat/filebeat.yml
+# ============================== Filebeat Inputs ===============================
+filebeat.inputs:
+  - type: filestream
+    id: nginx-filestream
+    enabled: true
+    paths:
+      - /var/log/nginx/access.log
+      - /var/log/nginx/error.log
+    parsers:
+      - ndjson:
+          target: ""
+    processors:
+      - dissect:
+          tokenizer: '%{clientip} - - [%{timestamp}] "%{host}" "%{http.method} %{http.request} HTTP/%{http.version}" %{http.response.status_code} %{bytes_sent} "%{http.referrer}" "%{user_agent}" "%{other}"'
+          field: "message"
+          target_prefix: "nginx.access"
+      - drop_fields:
+          fields: ["message"] 
+# ============================== Filebeat Modules ==============================
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+
+# ======================= Elasticsearch Template Settings ======================
+setup.template.enabled: false
+setup.ilm.enabled: false
+setup.template.name: "eos-logs"
+setup.template.pattern: "eos-logs-*"
+
+# ================================== Output ====================================
+output.elasticsearch:
+  hosts: ["172.16.11.76:9200"]
+  index: "eos-logs-%{+yyyy.MM}"
+
+# ================================= Processors =================================
+processors:
+  - add_host_metadata:
+      when.not.contains.tags: forwarded
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+  - add_kubernetes_metadata: ~
+  - drop_fields:
+      fields: ["message"]  # Optional: Drop original message if parsed fields are enough
+
+# ================================== Logging ===================================
+logging.level: error
