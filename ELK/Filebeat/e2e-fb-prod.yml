@@ -14,7 +14,6 @@ filebeat.inputs:
           field: message
           target_prefix: parsed_haproxy
           ignore_failure: true
-      - add_locale: ~
       - add_fields:
           target: ''
           fields:
@@ -32,7 +31,6 @@ filebeat.inputs:
     multiline.negate: true
     multiline.match: after
     processors:
-      - add_locale: ~
       - add_fields:
           target: ''
           fields:
@@ -41,8 +39,7 @@ filebeat.inputs:
 # ======================= Elasticsearch template setting =======================
 setup.template.settings:
   index.number_of_shards: 1
-  index.number_of_replicas: 1
-  index.lifecycle.name: "monthly_rollover_policy" 
+  index.lifecycle.name: "monthly_rollover_only" 
   index.lifecycle.rollover_alias: "myaccount_syslog"
 
 # ================================== Outputs ===================================
@@ -50,7 +47,7 @@ setup.template.enabled: true
 setup.ilm.enabled: true
 setup.ilm.rollover_alias: "myaccount_syslog"
 setup.ilm.pattern: "{now/d}-000001"
-setup.ilm.policy_name: "monthly_rollover_policy"
+setup.ilm.policy_name: "monthly_rollover_only"
 
 output.elasticsearch:
   hosts: ["localhost:9200"]
@@ -76,12 +73,6 @@ processors:
         - from: "parsed.logfile"
           to: "log_type"
       ignore_missing: true
-  - timestamp:
-      field: "@timestamp"
-      layouts:
-        - "2006-01-02T15:04:05.999Z"
-      test:
-        - "2023-01-01T00:00:00.000Z"
 
 # ================================== Logging ===================================
 logging.level: error
