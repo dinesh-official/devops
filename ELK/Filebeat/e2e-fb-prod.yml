@@ -1,0 +1,87 @@
+# ============================== Filebeat inputs ===============================
+filebeat.inputs:
+  - type: filestream
+    id: haproxy-logs
+    enabled: true
+    paths:
+      - /var/log/remote_logs/*/haproxy.log
+    fields_under_root: true
+    fields:
+      log_type: haproxy
+    processors:
+      - dissect:
+          tokenizer: "%{haproxy.syslog_date} %{haproxy.syslog_time} %{haproxy.hostname} %{haproxy.program}[%{haproxy.pid}]: %{haproxy.client_ip}:%{haproxy.client_port} [%{haproxy.accept_date}] %{haproxy.frontend} %{haproxy.backend}/%{haproxy.server} %{haproxy.Tq}/%{haproxy.Tw}/%{haproxy.Tc}/%{haproxy.Tr}/%{haproxy.Tt} %{haproxy.status} %{haproxy.bytes_read} %{*} %{*} %{haproxy.termination_state} %{haproxy.actconn}/%{haproxy.feconn}/%{haproxy.beconn}/%{haproxy.srvconn}/%{haproxy.retries} %{haproxy.srv_queue}/%{haproxy.backend_queue} \"%{haproxy.http_request}\""
+          field: message
+          target_prefix: parsed_haproxy
+          ignore_failure: true
+      - add_locale: ~
+      - add_fields:
+          target: ''
+          fields:
+            index_month: "${data.timestamp.format('YYYY.MM')}"
+
+  - type: filestream
+    id: remote-logs
+    enabled: true
+    paths:
+      - /var/log/remote_logs/*/*.log
+    fields_under_root: true
+    fields:
+      source: "remote_logs"
+    multiline.pattern: '^\d{4}-\d{2}-\d{2} '
+    multiline.negate: true
+    multiline.match: after
+    processors:
+      - add_locale: ~
+      - add_fields:
+          target: ''
+          fields:
+            index_month: "${data.timestamp.format('YYYY.MM')}"
+
+# ======================= Elasticsearch template setting =======================
+setup.template.settings:
+  index.number_of_shards: 1
+  index.number_of_replicas: 1
+  index.lifecycle.name: "monthly_rollover_policy" 
+  index.lifecycle.rollover_alias: "myaccount_syslog"
+
+# ================================== Outputs ===================================
+setup.template.enabled: true
+setup.ilm.enabled: true
+setup.ilm.rollover_alias: "myaccount_syslog"
+setup.ilm.pattern: "{now/d}-000001"
+setup.ilm.policy_name: "monthly_rollover_policy"
+
+output.elasticsearch:
+  hosts: ["localhost:9200"]
+  indices:
+    - index: "myaccount_syslog-%{+YYYY.MM}"
+      when.not.equals:
+        log_type: "haproxy"
+    - index: "haproxy-logs-%{+YYYY.MM}"
+      when.equals:
+        log_type: "haproxy"
+  preset: balanced
+
+# ================================= Processors =================================
+processors:
+  - dissect:
+      tokenizer: "/var/log/remote_logs/%{hostname}/%{logfile}.log"
+      field: "log.file.path"
+      target_prefix: "parsed"
+  - rename:
+      fields:
+        - from: "parsed.hostname"
+          to: "log.source_host"
+        - from: "parsed.logfile"
+          to: "log_type"
+      ignore_missing: true
+  - timestamp:
+      field: "@timestamp"
+      layouts:
+        - "2006-01-02T15:04:05.999Z"
+      test:
+        - "2023-01-01T00:00:00.000Z"
+
+# ================================== Logging ===================================
+logging.level: error
