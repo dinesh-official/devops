@@ -1,4 +1,4 @@
-### Detailed Full File Paths of ElastAlert2 Setup:
+# Detailed Full File Paths of ElastAlert2 Setup:
 
 ```
 /opt/elastalert2/config.yaml
