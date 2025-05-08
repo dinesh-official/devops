@@ -9,3 +9,11 @@ elastalert/
 ├── elastalert_status (index)  <-- 🛢️ ES index used internally by ElastAlert
 └── requirements.txt           <-- 📦 Python dependencies (if needed)
 ```
+How They Work Together
+
+```
+[Filebeat] → [Elasticsearch] ← [ElastAlert] → [Rules] → [SMTP / Slack / Webhook]
+                                     ↑
+                            uses config.yaml
+
+```
