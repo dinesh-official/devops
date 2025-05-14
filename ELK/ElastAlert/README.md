@@ -303,3 +303,15 @@ This setup will:
 - Prevent alert spam with 24-hour cooldown
 - Provide actionable troubleshooting steps
 - Run as a reliable system service
+
+
+
+
+
+### Error Fix
+
+**   UTC Time error 
+```
+sudo sed -i "s/datetime.UTC/datetime.timezone.utc/g" /usr/local/lib/python3.10/dist-packages/elastalert/util.py
+```
+
