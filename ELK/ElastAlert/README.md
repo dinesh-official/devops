@@ -7,6 +7,7 @@
 2. **Access to your ELK stack** (IP: `164.52.192.157:9200`)
 3. **Python 3.6+** (recommended: Python 3.8+)
 4. **Basic terminal knowledge** (SSH, `vim/nano`, `sudo` access)
+5. **Ubuntu 22.04**
 
 ---
 
