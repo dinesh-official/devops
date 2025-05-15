@@ -1,0 +1,47 @@
+name: "PRODUCTION LOG STOPPAGE ALERT - Single Notification"
+type: flatline
+index: "filebeat-*"
+threshold: 1
+timeframe:
+  minutes: 5
+
+# Only send one alert until logs resume
+realert:
+  minutes: 0  # Don't repeat alerts for same event
+aggregation:
+  minutes: 10  # Group similar alerts for 10 minutes
+run_rule_every:
+  minutes: 1   # How often to check
+
+# Reset alert state when logs return
+alert_on_new_data: true
+reset_rule_after_alert: true
+
+filter:
+- query:
+    query_string:
+      query: "fields.env:production"
+
+alert:
+- email
+email:
+- "dineshkumar.s@e2enetworks.com"
+smtp_host: "smtp.gmail.com"
+smtp_port: 587
+smtp_auth_file: /etc/elastalert/smtp_auth.yaml
+from_addr: "dkprojects121@gmail.com"
+
+alert_subject: "🚨 CRITICAL: Production Logs Stopped!"
+alert_text: |
+  ❌ No production logs received in the last 5 minutes!
+  
+  🔍 Details:
+  - Index: {0}
+  - Last log time: {1}
+  
+  🛠️ Next Steps:
+  1. Check Filebeat service
+  2. Verify network connectivity
+  3. Inspect Elasticsearch cluster health
+  
+  You won't receive more alerts until logs resume and stop again.
