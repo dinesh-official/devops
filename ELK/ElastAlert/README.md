@@ -159,59 +159,7 @@ elastalert --verbose --config config.yaml
 *(Check if it connects to Elasticsearch and monitors logs.)*
 
 ### **4.2 Run as a Background Service**
-```bash
-sudo nano /etc/systemd/system/elastalert.service
-```
-Paste:
-```ini
-[Unit]
-Description=ElastAlert2
-After=network.target
-
-[Service]
-User=youruser
-WorkingDirectory=/home/youruser/elastalert
-ExecStart=/home/youruser/elastalert/venv/bin/elastalert --config /home/youruser/elastalert/config.yaml
-
-[Install]
-WantedBy=multi-user.target
-```
-
-**Enable & Start:**
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable elastalert
-sudo systemctl start elastalert
-sudo systemctl status elastalert  # Check if running
-```
-
----
-
-## **🔹 Step 5: Verify Alerts in Kibana**
-1. **Check `elastalert_status` index** in Kibana Dev Tools:
-   ```json
-   GET elastalert_status/_search
-   ```
-2. **Check emails** (if SMTP is configured correctly).
-
----
-
-## **🔹 Troubleshooting**
-| Issue | Solution |
-|--------|-----------|
-| **Cannot connect to Elasticsearch** | Check firewall (`ufw allow 9200`), credentials, and ES logs |
-| **No alerts triggered** | Adjust `timeframe.minutes` or `threshold` |
-| **SMTP errors** | Test SMTP with `curl` or `telnet` |
-| **Rule not loading** | Run `elastalert-test-rule` for debugging |
-
----
-
-To start ElastAlert2 as a background running process, you have two main options: using **systemd** (recommended for production) or running it directly in the background. Here's how to do both:
-
----
-
-## **Option 1: Run as a Systemd Service (Recommended)**
-### **1.1 Ensure the systemd service file is correct**
+### **4.2.1 Ensure the systemd service file is correct**
 ```bash
 sudo nano /etc/systemd/system/elastalert.service
 ```
@@ -233,14 +181,14 @@ RestartSec=30
 WantedBy=multi-user.target
 ```
 
-### **1.2 Reload systemd and start the service**
+### **14.2.2 Reload systemd and start the service**
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl enable elastalert  # Start on boot
 sudo systemctl start elastalert   # Start now
 ```
 
-### **1.3 Check if it's running**
+### **4.2.3 Check if it's running**
 ```bash
 sudo systemctl status elastalert
 ```
@@ -251,12 +199,13 @@ Expected output:
      Active: active (running) since [timestamp]
 ```
 
-### **1.4 View logs (if needed)**
+### **4.2.4 View logs (if needed)**
 ```bash
 journalctl -u elastalert -f  # Follow logs in real-time
 ```
 
 ---
+
 
 ## **Option 2: Run Directly in Background (Quick Test)**
 If you don’t want to use `systemd`, you can run ElastAlert2 in the background manually.
@@ -289,69 +238,3 @@ pkill -f "elastalert"  # Kills all ElastAlert processes
 ```
 
 
-Option 1: Run as a Systemd Service (Recommended)
-1.1 Ensure the systemd service file is correct
-bash
-sudo nano /etc/systemd/system/elastalert.service
-Paste this (adjust paths if needed):
-
-```
-[Unit]
-Description=ElastAlert2
-After=network.target
-
-[Service]
-User=elastalert
-Group=elastalert
-WorkingDirectory=/home/elastalert/elastalert
-ExecStart=/home/elastalert/elastalert/venv/bin/python -m elastalert.elastalert --config /home/elastalert/elastalert/config.yaml
-Restart=always
-RestartSec=30
-
-[Install]
-WantedBy=multi-user.target
-```
-1.2 Reload systemd and start the service
-```
-sudo systemctl daemon-reload
-sudo systemctl enable elastalert  # Start on boot
-sudo systemctl start elastalert   # Start now
-```
-1.3 Check if it's running
-```
-sudo systemctl status elastalert
-Expected output:
-
-● elastalert.service - ElastAlert2
-     Loaded: loaded (/etc/systemd/system/elastalert.service; enabled; vendor preset: enabled)
-     Active: active (running) since [timestamp]
-```
-1.4 View logs (if needed)
-```
-journalctl -u elastalert -f  # Follow logs in real-time
-Option 2: Run Directly in Background (Quick Test)
-If you don’t want to use systemd, you can run ElastAlert2 in the background manually.
-```
-2.1 Activate the virtual environment
-```
-cd /home/elastalert/elastalert
-source venv/bin/activate
-```
-2.2 Run in the background with nohup
-```
-nohup python -m elastalert.elastalert --config config.yaml > elastalert.log 2>&1 &
-nohup keeps the process running after logout.
-
-Output is logged to elastalert.log.
-```
-2.3 Check if it's running
-```
-ps aux | grep elastalert
-Expected output:
-
-elastalert 12345  0.5  2.1 1023456 45000 ?  Sl   14:30   0:02 python -m elastalert.elastalert --config config.yaml
-```
-2.4 Stop the background process (if needed)
-```
-pkill -f "elastalert"  # Kills all ElastAlert processes
-```
