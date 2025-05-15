@@ -99,12 +99,12 @@ filter:
 alert:
 - email
 email:
-- "your.email@example.com"  # Change to your email
+- "dineshkumar.s@e2enetworks.com"  # Change to your email
 smtp_host: "smtp.gmail.com" # Change to your SMTP server
 smtp_port: 587
 smtp_auth_file: /etc/elastalert/smtp_auth.yaml  # We'll create this next
-from_addr: "alerts@yourdomain.com"
-email_reply_to: "no-reply@yourdomain.com"
+from_addr: "dkprojects121@gmail.com"
+email_reply_to: "no-reply@yourdomain.com" # Optional 
 
 alert_subject: "🚨 ALERT: Logs Stopped for Production!"
 alert_text: |
@@ -127,7 +127,7 @@ sudo nano /etc/elastalert/smtp_auth.yaml
 ```
 Paste:
 ```yaml
-user: "your.email@gmail.com"  # SMTP username
+user: "dkprojects121@gmail.com"  # SMTP username
 password: "your-app-password" # Use an app password for Gmail
 ```
 
