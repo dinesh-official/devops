@@ -10,6 +10,18 @@
 5. **Ubuntu 22.04**
 
 ---
+# Create the user 'elastalert'
+```
+# 1. Create the user 'elastalert'
+sudo adduser elastalert
+
+# 2. (Optional) Add the user to the 'sudo' group if you want it to have admin privileges
+sudo usermod -aG sudo elastalert
+
+# 3. Switch to the new user
+su - elastalert
+
+```
 
 ## **🔹 Step 1: Install ElastAlert2 on a New Node**
 *(This node will monitor your ELK stack remotely.)*
