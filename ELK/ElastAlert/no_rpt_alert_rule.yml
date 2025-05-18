@@ -1,47 +1,53 @@
-name: "PRODUCTION LOG STOPPAGE ALERT - Single Notification"
+name: "PRODUCTION LOG STOPPAGE ALERT (24h Silence)"
 type: flatline
 index: "filebeat-*"
 threshold: 1
 timeframe:
   minutes: 5
 
-# Only send one alert until logs resume
-realert:
-  minutes: 0  # Don't repeat alerts for same event
-aggregation:
-  minutes: 10  # Group similar alerts for 10 minutes
-run_rule_every:
-  minutes: 1   # How often to check
-
-# Reset alert state when logs return
-alert_on_new_data: true
+# Alert Behavior Control
+alert_on_new_data: true    # Auto-reset when logs resume
 reset_rule_after_alert: true
+realert:
+  minutes: 1440           # 24h silence after first alert
 
+# Force single alert
+aggregation:
+  minutes: 0
+summary_table_fields: []
+
+# Production Log Filter
 filter:
 - query:
     query_string:
-      query: "fields.env:production"
+      query: "fields.env:production AND _index:filebeat-*"
 
+# Email Alert Configuration
 alert:
 - email
 email:
 - "dineshkumar.s@e2enetworks.com"
 smtp_host: "smtp.gmail.com"
 smtp_port: 587
-smtp_auth_file: /etc/elastalert/smtp_auth.yaml
+smtp_auth_file: "/etc/elastalert/smtp_auth.yaml"
 from_addr: "dkprojects121@gmail.com"
+email_reply_to: "no-reply@yourdomain.com"
 
-alert_subject: "🚨 CRITICAL: Production Logs Stopped!"
+# Clear Alert Content
+alert_subject: "🚨 [SINGLE ALERT] Production Logs Stopped!"
 alert_text: |
-  ❌ No production logs received in the last 5 minutes!
+  ❌ CRITICAL: Zero logs in filebeat-* for 5+ minutes
   
-  🔍 Details:
-  - Index: {0}
-  - Last log time: {1}
+  ⏱️ Last log: {0}
   
-  🛠️ Next Steps:
-  1. Check Filebeat service
-  2. Verify network connectivity
-  3. Inspect Elasticsearch cluster health
+  🛠️ Immediate Actions:
+  1. Check Filebeat: `systemctl status filebeat`
+  2. Verify Logstash: `curl localhost:9600/_node/stats`
+  3. Inspect ES: `curl localhost:9200/_cluster/health`
   
-  You won't receive more alerts until logs resume and stop again.
+  ⚠️ Next alert in 24h (if issue persists)
+alert_text_args:
+- "@timestamp"
+
+# Debugging (optional)
+# debug: true
