@@ -1,0 +1,41 @@
+  minutes: 10
+run_every:
+  minutes: 1
+alert_on_new_data: true
+reset_rule_after_alert: true
+realert:
+  minutes: 1440  # 24h silence after first alert
+
+# Filter
+filter:
+- query:
+    query_string:
+      query: "fields.env:production AND _index:filebeat-*"
+
+# Email Alert
+alert:
+- email
+email:
+- "dineshkumar.s@e2enetworks.com"
+cc:  # Add CC recipients here
+- "soc@e2enetworks.com"
+smtp_host: "smtp.gmail.com"
+smtp_port: 587
+smtp_auth_file: "/etc/elastalert/smtp_auth.yaml"
+from_addr: "dkprojects121@gmail.com"
+email_reply_to: "no-reply@yourdomain.com"
+
+# Detailed Alert Content
+alert_subject: "🚨 ALERT: Rsyslog Logs Not Reaching ELK Stack in Production Environment!"
+
+alert_text: |
+  ❌ No logs received in the last 5 minutes!
+  
+  🔍 Details:
+  - Index: {0}
+  - Last log time: {1}
+  
+  🚀 Action Required: Check Filebeat/Logstash/Elasticsearch.
+alert_text_args:
+- index
+- "@timestamp"
