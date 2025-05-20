@@ -1,3 +1,4 @@
+```
 Operator | Meaning | SQL Equivalent | Example
 eq | Equals | = | first_name = 'John'
 neq | Not Equals | != | first_name != 'Alice'
@@ -30,3 +31,5 @@ nrregex | Does not match regular expression | NOT REGEXP | first_name NOT REGEXP
 size | Match the size of array or string | LENGTH() or ARRAY_LENGTH() | tags SIZE 3
 ltsize | Size less than | LENGTH() < x or ARRAY_LENGTH() < x | tags SIZE < 5
 gtsize | Size greater than | LENGTH() > x or ARRAY_LENGTH() > x | tags SIZE > 2
+
+```
