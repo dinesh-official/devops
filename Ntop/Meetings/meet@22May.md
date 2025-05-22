@@ -1,8 +1,4 @@
-To generate a GitHub-style markdown documentation file, you'll need to log in to ChatGPT and use the **ChatGPT canvas** feature. Once logged in, I can help you create and edit the documentation in a collaborative format.
 
-However, here's a ready-to-copy **Markdown document** version of your ClickHouse and ntopng installation steps, which you can manually place in a `.md` file or GitHub repo:
-
----
 
 # 🐘 ClickHouse + ntopng Installation & Troubleshooting Guide
 
