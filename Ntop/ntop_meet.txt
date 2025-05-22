@@ -1,0 +1,118 @@
+https://clickhouse.com/docs/install#install-from-deb-packages
+ 
+sudo apt-get remove -y clickhouse-server clickhouse-client
+ 
+rm /etc/apt/sources.list.d/clickhouse.list
+ 
+sudo apt clean all
+ 
+curl -fsSL 'https://packages.clickhouse.com/rpm/lts/repodata/repomd.xml.key' | sudo gpg --dearmor -o /usr/share/keyrings/clickhouse-keyring.gpg
+ 
+ARCH=$(dpkg --print-architecture)
+ 
+echo "deb [signed-by=/usr/share/keyrings/clickhouse-keyring.gpg arch=${ARCH}] https://packages.clickhouse.com/deb stable main" | sudo tee /etc/apt/sources.list.d/clickhouse.list
+ 
+sudo apt-get update
+ 
+sudo apt-get install -y clickhouse-server clickhouse-client
+ 
+sudo apt-get remove -y clickhouse-server clickhouse-client
+ 
+sudo apt-get install -y clickhouse-server clickhouse-client
+ 
+sudo apt-get purge -y clickhouse-server clickhouse-client
+ 
+rm -rf /etc/clickhouse-server
+ 
+sudo apt-get install -y clickhouse-server clickhouse-client
+ 
+clickhouse-server --version
+ 
+ls -al /usr/bin/clickhouse-server
+ 
+/usr/bin/clickhouse-server --version
+ 
+ 
+sudo apt-get install -y apt-transport-https ca-certificates curl gnupg
+ 
+ 
+curl -fsSL 'https://packages.clickhouse.com/rpm/lts/repodata/repomd.xml.key' | sudo gpg --dearmor -o /usr/share/keyrings/clickhouse-keyring.gpg
+ 
+ 
+ARCH=$(dpkg --print-architecture)
+ 
+ 
+echo "deb [signed-by=/usr/share/keyrings/clickhouse-keyring.gpg arch=${ARCH}] https://packages.clickhouse.com/deb stable main" | sudo tee /etc/apt/sources.list.d/clickhouse.list
+ 
+ 
+sudo apt-get update
+ 
+ 
+sudo apt-get install -y clickhouse-server clickhouse-client
+ 
+ 
+clickhouse-server --version
+ 
+ 
+sydo systemctl restart clickhouse-server
+ 
+ 
+sudo nano /etc/clickhouse-server/config.xml
+ 
+clickhouse-client --version
+ 
+$ clickhouse-client --version
+ClickHouse client version 25.4.5.24 (official build).
+ 
+https://shop.ntop.org/recover_licenses.php
+ntop
+ntop product shop website. Welcome to the ntop shop where you can buy ntop network monitoring licenses
+ 
+1747751700
+ 
+Version:	6.5.250522 [Enterprise/Professional build]
+
+GIT rev:	dev:c5b4da4f5219fa40201fc7bfd37422319594eaf0:20250522
+
+Pro rev:	r7312
+
+Built on:	Ubuntu 22.04.4 LTS
+
+System Id:	LB637CB1B00B01053--UB637CB1BFD3176AE--OL
+
+Platform:	x86_64
+
+22/May/2025 20:43:54 [NtopPro.cpp:707] WARNING: [LICENSE] Invalid license [License mismatch (check systemId, product version, or host date/time)]
+
+22/May/2025 20:43:54 [NtopPro.cpp:736] WARNING: [LICENSE] ntopng will now run in Enterprise XL edition for 10 minutes
+
+22/May/2025 20:43:54 [NtopPro.cpp:742] WARNING: [LICENSE] before returning to community mode
+
+22/May/2025 20:43:54 [NtopPro.cpp:744] WARNING: [LICENSE] You can buy a permanent license at http://shop.ntop.org
+
+22/May/2025 20:43:54 [NtopPro.cpp:748] WARNING: [LICENSE] or run ntopng in community mode starting
+
+22/May/2025 20:43:54 [NtopPro.cpp:750] WARNING: [LICENSE] ntopng --community
+
+Edition:	Community
+
+License Type:	Time-Limited [License mismatch (check systemId, product version, or host date/time)]
+
+Validity:	Until Thu May 22 20:53:54 2025
+
+License:	sesYkz8p2kaAfKofalw8of+pcRJSdmuHfafUjfPGDAFvkBYuLCkJF/N0/Zp2wMbmcSJxg
+
+        	6HbMxGViIpp4MSuFWvgDI8FtT6bPaf36kFHlsDDQCOBHcSgfSBWxr4p1IZTmzj+UB7AaP
+
+        	FC7ooNukCRpx4vPx9FyrrKG0MWS9SjDg5yoxvLmIgG77/gnTzv5ra25RdsE2OGur55Rud
+
+        	eIIFdEMKXEarv82JTjk+VPuMdZ6TSeJgpwm4Gf4PppTpOM1RO8h21vGjId6PPGBaUQMXQ
+
+        	bTPeN62re8ft/Jr/acZEAoi0VdGbWeFfacLgT2ZKdcIEeukI0iJMfnAZibTuyUowdg==
+
+License Hash:	E66C80353FBEF16D15D7506AF2674B6A1748359665649DCB82
+ 
+"clickhouse;127.0.0.1@9000,9004;ntopng;default;"
+ 
+journalctl -eu ntopng
+ 
