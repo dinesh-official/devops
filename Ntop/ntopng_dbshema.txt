@@ -1,0 +1,53 @@
+e2e-65-24.ssdcloudindia.net :) USE ntopng;
+SHOW TABLES;
+
+
+USE ntopng
+
+Query id: 4bf76983-63ba-4b6b-9be8-ef9bcb1ff31b
+
+Ok.
+
+0 rows in set. Elapsed: 0.001 sec. 
+
+
+SHOW TABLES
+
+Query id: 8fc0cdea-6bdf-4250-a43e-71d2a950d347
+
+    ┌─name─────────────────────────────┐
+ 1. │ active_monitoring_alerts         │
+ 2. │ active_monitoring_alerts_view    │
+ 3. │ all_alerts_view                  │
+ 4. │ assets                           │
+ 5. │ engaged_active_monitoring_alerts │
+ 6. │ engaged_host_alerts              │
+ 7. │ engaged_interface_alerts         │
+ 8. │ engaged_mac_alerts               │
+ 9. │ engaged_network_alerts           │
+10. │ engaged_snmp_alerts              │
+11. │ engaged_system_alerts            │
+12. │ engaged_user_alerts              │
+13. │ flow_alerts_view                 │
+14. │ flows                            │
+15. │ host_alerts                      │
+16. │ host_alerts_view                 │
+17. │ hourly_flows                     │
+18. │ interface_alerts                 │
+19. │ interface_alerts_view            │
+20. │ mac_alerts                       │
+21. │ mac_alerts_view                  │
+22. │ mitre_table_info                 │
+23. │ network_alerts                   │
+24. │ network_alerts_view              │
+25. │ snmp_alerts                      │
+26. │ snmp_alerts_view                 │
+27. │ system_alerts                    │
+28. │ system_alerts_view               │
+29. │ user_alerts                      │
+30. │ user_alerts_view                 │
+31. │ vulnerability_scan_data          │
+32. │ vulnerability_scan_report        │
+    └──────────────────────────────────┘
+
+32 rows in set. Elapsed: 0.001 sec. 
