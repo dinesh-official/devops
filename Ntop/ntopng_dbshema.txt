@@ -51,3 +51,110 @@ Query id: 8fc0cdea-6bdf-4250-a43e-71d2a950d347
     └──────────────────────────────────┘
 
 32 rows in set. Elapsed: 0.001 sec. 
+
+
+-------------------------------------------------------------------------------------------------------------
+
+
+
+DESCRIBE TABLE flows
+
+Query id: c612bd3c-6473-4833-81a9-c71e695e08d0
+
+    ┌─name───────────────────┬─type─────┬─default_type─┬─default_expression─┬─comment─┬─codec_expression─┬─ttl_expression─┐
+ 1. │ FLOW_ID                │ UInt64   │              │                    │         │                  │                │
+ 2. │ IP_PROTOCOL_VERSION    │ UInt8    │              │                    │         │                  │                │
+ 3. │ FIRST_SEEN             │ DateTime │              │                    │         │                  │                │
+ 4. │ LAST_SEEN              │ DateTime │              │                    │         │                  │                │
+ 5. │ VLAN_ID                │ UInt16   │              │                    │         │                  │                │
+ 6. │ PACKETS                │ UInt32   │              │                    │         │                  │                │
+ 7. │ TOTAL_BYTES            │ UInt64   │              │                    │         │                  │                │
+ 8. │ SRC2DST_BYTES          │ UInt64   │              │                    │         │                  │                │
+ 9. │ DST2SRC_BYTES          │ UInt64   │              │                    │         │                  │                │
+10. │ SRC2DST_DSCP           │ UInt8    │              │                    │         │                  │                │
+11. │ DST2SRC_DSCP           │ UInt8    │              │                    │         │                  │                │
+12. │ PROTOCOL               │ UInt8    │              │                    │         │                  │                │
+13. │ IPV4_SRC_ADDR          │ UInt32   │              │                    │         │                  │                │
+14. │ IPV6_SRC_ADDR          │ IPv6     │              │                    │         │                  │                │
+15. │ IP_SRC_PORT            │ UInt16   │              │                    │         │                  │                │
+16. │ IPV4_DST_ADDR          │ UInt32   │              │                    │         │                  │                │
+17. │ IPV6_DST_ADDR          │ IPv6     │              │                    │         │                  │                │
+18. │ IP_DST_PORT            │ UInt16   │              │                    │         │                  │                │
+19. │ L7_PROTO               │ UInt16   │              │                    │         │                  │                │
+20. │ L7_PROTO_MASTER        │ UInt16   │              │                    │         │                  │                │
+21. │ L7_CATEGORY            │ UInt16   │              │                    │         │                  │                │
+22. │ FLOW_RISK              │ UInt64   │              │                    │         │                  │                │
+23. │ INFO                   │ String   │              │                    │         │                  │                │
+24. │ PROFILE                │ String   │              │                    │         │                  │                │
+25. │ NTOPNG_INSTANCE_NAME   │ String   │              │                    │         │                  │                │
+26. │ INTERFACE_ID           │ UInt16   │              │                    │         │                  │                │
+27. │ STATUS                 │ UInt8    │              │                    │         │                  │                │
+28. │ SRC_COUNTRY_CODE       │ UInt16   │              │                    │         │                  │                │
+29. │ DST_COUNTRY_CODE       │ UInt16   │              │                    │         │                  │                │
+30. │ SRC_LABEL              │ String   │              │                    │         │                  │                │
+31. │ DST_LABEL              │ String   │              │                    │         │                  │                │
+32. │ SRC_MAC                │ UInt64   │              │                    │         │                  │                │
+33. │ DST_MAC                │ UInt64   │              │                    │         │                  │                │
+34. │ COMMUNITY_ID           │ String   │              │                    │         │                  │                │
+35. │ SRC_ASN                │ UInt32   │              │                    │         │                  │                │
+36. │ DST_ASN                │ UInt32   │              │                    │         │                  │                │
+37. │ PROBE_IP               │ UInt32   │              │                    │         │                  │                │
+38. │ OBSERVATION_POINT_ID   │ UInt16   │              │                    │         │                  │                │
+39. │ SRC2DST_TCP_FLAGS      │ UInt8    │              │                    │         │                  │                │
+40. │ DST2SRC_TCP_FLAGS      │ UInt8    │              │                    │         │                  │                │
+41. │ SCORE                  │ UInt16   │              │                    │         │                  │                │
+42. │ QOE_SCORE              │ UInt8    │              │                    │         │                  │                │
+43. │ CLIENT_NW_LATENCY_US   │ UInt32   │              │                    │         │                  │                │
+44. │ SERVER_NW_LATENCY_US   │ UInt32   │              │                    │         │                  │                │
+45. │ CLIENT_LOCATION        │ UInt8    │              │                    │         │                  │                │
+46. │ SERVER_LOCATION        │ UInt8    │              │                    │         │                  │                │
+47. │ SRC_NETWORK_ID         │ UInt32   │              │                    │         │                  │                │
+48. │ DST_NETWORK_ID         │ UInt32   │              │                    │         │                  │                │
+49. │ CLIENT_FINGERPRINT     │ String   │              │                    │         │                  │                │
+50. │ INPUT_SNMP             │ UInt32   │              │                    │         │                  │                │
+51. │ OUTPUT_SNMP            │ UInt32   │              │                    │         │                  │                │
+52. │ SRC_HOST_POOL_ID       │ UInt16   │              │                    │         │                  │                │
+53. │ DST_HOST_POOL_ID       │ UInt16   │              │                    │         │                  │                │
+54. │ SRC_PROC_NAME          │ String   │              │                    │         │                  │                │
+55. │ DST_PROC_NAME          │ String   │              │                    │         │                  │                │
+56. │ SRC_PROC_USER_NAME     │ String   │              │                    │         │                  │                │
+57. │ DST_PROC_USER_NAME     │ String   │              │                    │         │                  │                │
+58. │ ALERTS_MAP             │ String   │              │                    │         │                  │                │
+59. │ SEVERITY               │ UInt8    │              │                    │         │                  │                │
+60. │ IS_CLI_ATTACKER        │ UInt8    │              │                    │         │                  │                │
+61. │ IS_CLI_VICTIM          │ UInt8    │              │                    │         │                  │                │
+62. │ IS_CLI_BLACKLISTED     │ UInt8    │              │                    │         │                  │                │
+63. │ IS_SRV_ATTACKER        │ UInt8    │              │                    │         │                  │                │
+64. │ IS_SRV_VICTIM          │ UInt8    │              │                    │         │                  │                │
+65. │ IS_SRV_BLACKLISTED     │ UInt8    │              │                    │         │                  │                │
+66. │ ALERT_STATUS           │ UInt8    │              │                    │         │                  │                │
+67. │ USER_LABEL             │ String   │              │                    │         │                  │                │
+68. │ USER_LABEL_TSTAMP      │ DateTime │              │                    │         │                  │                │
+69. │ PROTOCOL_INFO_JSON     │ String   │              │                    │         │                  │                │
+70. │ ALERT_JSON             │ String   │              │                    │         │                  │                │
+71. │ IS_ALERT_DELETED       │ UInt8    │              │                    │         │                  │                │
+72. │ SRC2DST_PACKETS        │ UInt32   │              │                    │         │                  │                │
+73. │ DST2SRC_PACKETS        │ UInt32   │              │                    │         │                  │                │
+74. │ ALERT_CATEGORY         │ UInt8    │              │                    │         │                  │                │
+75. │ MINOR_CONNECTION_STATE │ UInt8    │              │                    │         │                  │                │
+76. │ MAJOR_CONNECTION_STATE │ UInt8    │              │                    │         │                  │                │
+77. │ PRE_NAT_IPV4_SRC_ADDR  │ UInt32   │              │                    │         │                  │                │
+78. │ PRE_NAT_SRC_PORT       │ UInt32   │              │                    │         │                  │                │
+79. │ PRE_NAT_IPV4_DST_ADDR  │ UInt32   │              │                    │         │                  │                │
+80. │ PRE_NAT_DST_PORT       │ UInt32   │              │                    │         │                  │                │
+81. │ POST_NAT_IPV4_SRC_ADDR │ UInt32   │              │                    │         │                  │                │
+82. │ POST_NAT_SRC_PORT      │ UInt32   │              │                    │         │                  │                │
+83. │ POST_NAT_IPV4_DST_ADDR │ UInt32   │              │                    │         │                  │                │
+84. │ POST_NAT_DST_PORT      │ UInt32   │              │                    │         │                  │                │
+85. │ WLAN_SSID              │ String   │              │                    │         │                  │                │
+86. │ WTP_MAC_ADDRESS        │ UInt64   │              │                    │         │                  │                │
+87. │ DOMAIN_NAME            │ String   │              │                    │         │                  │                │
+88. │ REQUIRE_ATTENTION      │ Bool     │              │                    │         │                  │                │
+    └─name───────────────────┴─type─────┴─default_type─┴─default_expression─┴─comment─┴─codec_expression─┴─ttl_expression─┘
+
+88 rows in set. Elapsed: 0.001 sec. 
+
+
+
+
+
