@@ -1,4 +1,7 @@
 ## connect to clickhouse db
+```
+clickhouse-client --host 216.48.176.80 --port 9000 --user default
+```
 
 
 ## ssh 
