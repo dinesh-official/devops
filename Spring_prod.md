@@ -1,109 +1,85 @@
-To run a **Spring Boot application** on **Ubuntu**, follow these clean, production-friendly steps. There are **two main approaches**:
+Perfect! Let's go step-by-step to build your **Spring Boot `.jar`** into a **`.deb` package** that runs as a service on **Ubuntu**.
 
 ---
 
-## ✅ Option 1: Run Directly Using Java
+## ✅ STEP 1: Build your Spring Boot `.jar`
 
-### 1. **Install Java (e.g., JDK 17 or newer)**
+Make sure your `.jar` is ready.
 
 ```bash
-sudo apt update
-sudo apt install openjdk-17-jdk
+./mvnw clean package
+# or
+./gradlew bootJar
 ```
 
-✅ Verify:
+Let's assume your output is:
 
-```bash
-java -version
 ```
-
----
-
-### 2. **Copy Your Spring Boot JAR to Ubuntu**
-
-Let's assume your app is called `hunter.jar`.
-
-```bash
-scp hunter.jar user@your-server-ip:/home/user/
+target/hunter.jar
 ```
 
 ---
 
-### 3. **Run the JAR**
+## ✅ STEP 2: Create the `.deb` Directory Structure
+
+Create a working folder like `deb-pkg`:
 
 ```bash
-java -jar hunter.jar
-```
-
-To specify external config:
-
-```bash
-java -jar hunter.jar --spring.config.location=file:/etc/hunter/application.properties
-```
-
-To run in background:
-
-```bash
-nohup java -jar hunter.jar > hunter.log 2>&1 &
+mkdir -p hunter-deb/DEBIAN
+mkdir -p hunter-deb/usr/lib/hunter
+mkdir -p hunter-deb/etc/hunter
+mkdir -p hunter-deb/var/log/hunter
+mkdir -p hunter-deb/lib/systemd/system
 ```
 
 ---
 
-## ✅ Option 2: Set It Up as a Linux Service (systemd)
+## ✅ STEP 3: Add Required Files
 
-This is **production recommended**.
-
----
-
-### 📁 Recommended Directory Structure
-
-| File            | Location                             |
-| --------------- | ------------------------------------ |
-| JAR file        | `/usr/share/hunter/hunter.jar`       |
-| Config file     | `/etc/hunter/application.properties` |
-| Systemd service | `/etc/systemd/system/hunter.service` |
-
----
-
-### 1. **Create user**
+### 🔹 1. `control` file (`hunter-deb/DEBIAN/control`)
 
 ```bash
-sudo useradd --system --no-create-home --shell /usr/sbin/nologin hunter
+cat <<EOF > hunter-deb/DEBIAN/control
+Package: hunter
+Version: 1.0.0
+Section: base
+Priority: optional
+Architecture: all
+Maintainer: Dinesh Kumar <dineshdb121careers@gmail.com>
+Description: Hunter - SSH Network Alerting Service
+EOF
 ```
 
----
+### 🔹 2. Your `.jar` file
 
-### 2. **Copy Files**
+Copy your JAR:
 
 ```bash
-sudo mkdir -p /usr/share/hunter /etc/hunter
-sudo cp hunter.jar /usr/share/hunter/
-sudo cp application.properties /etc/hunter/
-sudo chown -R hunter:hunter /usr/share/hunter /etc/hunter
+cp target/hunter.jar hunter-deb/usr/lib/hunter/
 ```
 
----
-
-### 3. **Create `hunter.service`**
+### 🔹 3. Default config file (`/etc/hunter/hunter.conf`)
 
 ```bash
-sudo nano /etc/systemd/system/hunter.service
+cp your_local_hunter.conf hunter-deb/etc/hunter/hunter.conf
 ```
 
-Paste:
+### 🔹 4. Systemd service (`hunter-deb/lib/systemd/system/hunter.service`)
 
 ```ini
 [Unit]
-Description=Hunter Spring Boot Application
+Description=Hunter Spring Boot Service
 After=network.target
 
 [Service]
 User=hunter
-WorkingDirectory=/usr/share/hunter
-ExecStart=/usr/bin/java -jar /usr/share/hunter/hunter.jar --spring.config.location=file:/etc/hunter/application.properties
+WorkingDirectory=/usr/lib/hunter
+ExecStart=/usr/bin/java -jar /usr/lib/hunter/hunter.jar --spring.config.location=/etc/hunter/hunter.properties
 SuccessExitStatus=143
 Restart=on-failure
 RestartSec=5
+StandardOutput=append:/var/log/hunter/hunter.log
+StandardError=append:/var/log/hunter/hunter-error.log
 
 [Install]
 WantedBy=multi-user.target
@@ -111,37 +87,59 @@ WantedBy=multi-user.target
 
 ---
 
-### 4. **Enable & Start Service**
+## ✅ STEP 4: Add `postinst` Script (Optional but Recommended)
+
+`hunter-deb/DEBIAN/postinst`:
 
 ```bash
-sudo systemctl daemon-reload
-sudo systemctl enable hunter
-sudo systemctl start hunter
+#!/bin/bash
+
+# Create hunter user if not exists
+if ! id "hunter" >/dev/null 2>&1; then
+    useradd --system --no-create-home --shell /usr/sbin/nologin hunter
+fi
+
+# Set permissions
+chown -R hunter:hunter /usr/lib/hunter
+chown -R hunter:hunter /etc/hunter
+chown -R hunter:hunter /var/log/hunter
+
+# Enable and start service
+systemctl daemon-reexec
+systemctl daemon-reload
+systemctl enable hunter
 ```
 
-✅ Check status:
+Make it executable:
+
+```bash
+chmod +x hunter-deb/DEBIAN/postinst
+```
+
+---
+
+## ✅ STEP 5: Build the `.deb` Package
+
+```bash
+dpkg-deb --build hunter-deb
+mv hunter-deb.deb hunter_1.0.0_all.deb
+```
+
+---
+
+## ✅ STEP 6: Install on Ubuntu Server
+
+```bash
+sudo dpkg -i hunter_1.0.0_all.deb
+```
+
+Check status:
 
 ```bash
 sudo systemctl status hunter
 ```
 
-📄 Logs:
-
-```bash
-journalctl -u hunter -f
-```
-
----
-
-## Bonus: Running from `.deb` Package
-
-If you've built a `.deb` for your app:
-
-```bash
-sudo dpkg -i hunter.deb
-```
-
-Then:
+Start if needed:
 
 ```bash
 sudo systemctl start hunter
@@ -149,4 +147,10 @@ sudo systemctl start hunter
 
 ---
 
-Would you like help automating this with a `.deb` package that sets everything up in one go?
+## ✅ Done!
+
+Your Spring Boot app is now a `.deb` installable Linux service.
+
+---
+
+Would you like me to generate a script to automate all of this?
