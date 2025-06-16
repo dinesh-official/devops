@@ -5,7 +5,7 @@ clickhouse-client --host 216.48.176.80 --port 9000 --user default
 
 
 ## ssh 
-```
+```sql
 SELECT IPV4_SRC_ADDR AS src_ip, COUNT(*) AS flow_count
 FROM flows
 WHERE IP_DST_PORT = 22
@@ -16,7 +16,7 @@ ORDER BY flow_count DESC
 FORMAT JSON;
 ```
 with some filter 
-```
+```sql
 SELECT
     IPv4NumToString(IPV4_SRC_ADDR) AS src_ip,
     COUNT(*) AS flow_count
@@ -30,7 +30,7 @@ ORDER BY flow_count DESC
 FORMAT JSON;
 ```
 Bandwidth 
-```
+```sql
 SELECT 
     IPv4NumToString(IPV4_SRC_ADDR) AS src_ip, 
     DST_ASN, 
@@ -44,4 +44,23 @@ HAVING total_bytes > 1048576
 ORDER BY total_bytes DESC
 FORMAT JSON;
 
+```
+
+outbound 
+```sql
+SELECT 
+    IPv4NumToString(IPV4_SRC_ADDR) AS client_ip,
+    COUNT(*) AS OB_Count,
+    COUNT(DISTINCT IPV4_DST_ADDR) AS unique_server_ips,
+    groupArray(DISTINCT IP_DST_PORT) AS destination_ports
+FROM ntopng.flows
+WHERE 
+    DST_ASN != 132420
+    AND SRC_ASN = 132420
+    AND LAST_SEEN >= now() - INTERVAL 1 HOUR
+GROUP BY IPV4_SRC_ADDR
+ORDER BY 
+    unique_server_ips DESC,  
+    OB_Count DESC             
+LIMIT 100;
 ```
