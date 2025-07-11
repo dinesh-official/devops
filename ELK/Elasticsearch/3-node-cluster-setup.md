@@ -116,16 +116,40 @@ Run setup passwords:
 
 ---
 
-### 🚀 Tips for Production
-
-* Use dedicated roles if needed:
-
-  * `master` only nodes (no data)
-  * `data` only nodes
-* Monitor with Kibana and Metricbeat
-* Snapshots for backups
-* Avoid `split-brain` by keeping `minimum_master_nodes = (N/2 + 1)` logic (automated in 7.x+)
+Here’s how to **create a new index** (e.g., `my-index`) in your Elasticsearch cluster using `curl`, customized for your setup:
 
 ---
 
-Let me know if you want a **Kibana** setup added or a full `elasticsearch.yml` for all 3 nodes.
+### ✅ **Command to Create Index `my-index`** with 3 shards and 1 replica:
+
+```bash
+curl -X PUT "http://10.20.44.16:9200/my-index" -H 'Content-Type: application/json' -d '
+{
+  "settings": {
+    "number_of_shards": 3,
+    "number_of_replicas": 1
+  }
+}'
+```
+
+---
+
+### 🔍 Explanation:
+
+| Setting              | Value | Meaning                                             |
+| -------------------- | ----- | --------------------------------------------------- |
+| `number_of_shards`   | 3     | Splits index into 3 primary shards (1 per node)     |
+| `number_of_replicas` | 1     | Each primary shard has 1 backup (high availability) |
+
+---
+
+### ✅ Verify the index:
+
+```bash
+curl -X GET "http://10.20.44.16:9200/_cat/indices?v"
+```
+
+It should now show `my-index` in the list.
+
+Let me know if you want to define **mappings** (like data types) or set **custom index patterns** next.
+
