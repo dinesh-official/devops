@@ -33,36 +33,6 @@ curl http://localhost:9200
 
 ## 🔧 Multi-Node Cluster Setup (High Availability)
 
-**Title: Elasticsearch 3-Node Master-Slave (Highly Available) Cluster Setup Guide**
-
----
-
-### 📄 Overview
-
-This guide explains how to set up a **3-node Elasticsearch cluster** where:
-
-* One node acts as the **master**.
-* The other two act as **data/slave** nodes.
-* If the master goes down, one of the remaining nodes automatically takes over as the new master (high availability).
-
----
-
-### 🎨 Architecture Diagram
-
-```
-+------------------+       +------------------+       +------------------+
-|   Node 1         |       |   Node 2         |       |   Node 3         |
-|  (Master-eligible)| <--->| (Master-eligible) | <--->| (Master-eligible) |
-|   IP: 10.0.0.1   |       |   IP: 10.0.0.2   |       |   IP: 10.0.0.3   |
-|   Roles: master, |       |   Roles: master, |       |   Roles: master, |
-|          data    |       |          data    |       |          data    |
-+------------------+       +------------------+       +------------------+
-
-         ↑                    ↑                    ↑
-         ┃                    ┃                    ┃
-         └-- All nodes talk to each other for cluster discovery --┘
-```
-
 ### 🧠 Cluster Role Design:
 
 All 3 nodes will act as:
