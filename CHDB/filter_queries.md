@@ -69,7 +69,7 @@ LIMIT 100;
 outbount with filtered port
 ```sql
 
-WITH 0 AS filter_port  
+WITH 22 AS filter_port
 
 SELECT 
     IPv4NumToString(IPV4_SRC_ADDR) AS client_ip,
@@ -87,18 +87,4 @@ ORDER BY
     unique_server_ips DESC,  
     OB_Count DESC
 LIMIT 100;
-
-WITH 0 AS filter_port
-SELECT
-    IPv4NumToString(IPV4_SRC_ADDR) AS client_ip,
-    COUNT(*) AS OB_Count,
-    COUNTDistinct(IPV4_DST_ADDR) AS unique_server_ips,
-    groupArrayDistinct(IP_DST_PORT) AS destination_ports
-FROM ntopng.flows
-WHERE (DST_ASN != 132420) AND (SRC_ASN = 132420) AND (LAST_SEEN >= (now() - toIntervalHour(10000))) AND ((filter_port = 0) OR (IP_DST_PORT = filter_port))
-GROUP BY IPV4_SRC_ADDR
-ORDER BY
-    unique_server_ips DESC,
-    OB_Count DESC
-LIMIT 100
 ```
