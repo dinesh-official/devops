@@ -46,3 +46,11 @@
                          (More replicas optional)
 
 ```
+
+
+
+# Commnd To Login 
+```bash
+mysql -h <host> -P 3306 -u <'username'> -p <'password'>
+```
+
