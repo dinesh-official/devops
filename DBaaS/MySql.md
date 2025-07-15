@@ -1,4 +1,4 @@
-# Mysql Backend Architecture
+# Mysql / MariaDB Backend Architecture
 
 ```
                 ┌────────────────────┐
