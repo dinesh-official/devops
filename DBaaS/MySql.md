@@ -28,7 +28,7 @@
                 │  (App / Customer)  │
                 └─────────▲──────────┘
                           │
-                          │ (Public IP / Domain e.g., dbproxy.example.com)
+                          │ (Public IP / Domain e.g., e2e-81-70.ssdcloudindia.net)
                           ▼
                 ┌───────────────────────┐
                 │    MaxScale Node      │
