@@ -32,7 +32,7 @@ Instead of editing local files like `my.cnf` or `postgresql.conf`, AWS lets you 
 
 ## 📁 Traditional vs. RDS Configuration
 
-| Traditional Setup (Self-Hosted)       | Amazon RDS Setup               |
+| Traditional Setup (Self-Hosted)       |  RDS Setup                     |
 |---------------------------------------|--------------------------------|
 | `/etc/mysql/my.cnf`                   | MySQL Parameter Group          |
 | `/var/lib/pgsql/data/postgresql.conf`| PostgreSQL Parameter Group     |
