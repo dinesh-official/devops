@@ -88,3 +88,22 @@ ORDER BY
     OB_Count DESC
 LIMIT 100;
 ```
+
+
+
+Open Ports 
+```sql
+SELECT
+    IPv4NumToString(IPV4_DST_ADDR) AS ip,
+    COUNT(*) AS incoming_request_count,
+    COUNT(DISTINCT IPV4_SRC_ADDR) AS unique_source_ips
+FROM ntopng.flows
+WHERE DST_ASN = 132420
+  AND IP_DST_PORT = 22
+  AND LAST_SEEN >= now() - INTERVAL 24 HOUR  -- Change interval as needed
+GROUP BY IPV4_DST_ADDR
+HAVING incoming_request_count > 0
+ORDER BY incoming_request_count DESC
+LIMIT 10  -- Change as needed
+FORMAT JSON;
+```
