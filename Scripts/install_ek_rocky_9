@@ -1,0 +1,25 @@
+sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch && \
+cat <<EOF | sudo tee /etc/yum.repos.d/elasticsearch.repo
+[elasticsearch-7.x]
+name=Elasticsearch repository for 7.x packages
+baseurl=https://artifacts.elastic.co/packages/7.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+autorefresh=1
+type=rpm-md
+EOF
+&& \
+sudo dnf install elasticsearch kibana filebeat -y && \
+sudo bash -c 'echo -e "network.host: 0.0.0.0\ndiscovery.type: single-node" >> /etc/elasticsearch/elasticsearch.yml' && \
+sudo systemctl daemon-reexec && \
+sudo systemctl enable --now elasticsearch && \
+sudo sed -i 's|#server.host:.*|server.host: "0.0.0.0"|' /etc/kibana/kibana.yml && \
+sudo systemctl enable --now kibana && \
+sudo sed -i 's|^output.elasticsearch:.*|output.elasticsearch:\n  hosts: ["localhost:9200"]|' /etc/filebeat/filebeat.yml && \
+sudo sed -i 's|^output.logstash:|#output.logstash:|' /etc/filebeat/filebeat.yml && \
+sudo filebeat modules enable system && \
+sudo filebeat setup --pipelines --modules system && \
+sudo filebeat setup --index-management -E output.elasticsearch.hosts=["localhost:9200"] && \
+sudo filebeat setup -E setup.kibana.host=localhost:5601 && \
+sudo systemctl enable --now filebeat
