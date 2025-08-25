@@ -1,8 +1,4 @@
-Perfect 👍 I’ll format this into a **README.md** file with clear sections for **ntopng installation + ClickHouse integration** on **Rocky Linux**.
 
-Here’s the cleaned and well-structured version ⬇️
-
----
 
 # 📘 ntopng Installation & ClickHouse Integration on Rocky Linux
 
@@ -208,6 +204,3 @@ clickhouse-client --host <CLICKHOUSE_SERVER_IP> --port 9000 --user default --pas
 * ClickHouse is configured for **remote access**.
 * You can now query network flow data directly in ClickHouse.
 
----
-
-Would you like me to also create a **single setup script** (ntopng + ClickHouse + config) so you can just run it on a fresh Rocky Linux server and everything gets installed + configured automatically?
