@@ -95,7 +95,7 @@ System ID: LB637CB1B00B01053--UB637CB1BFD3176AE--OL
 ## 🔗 ClickHouse Connection Example
 
 ```
-clickhouse;127.0.0.1@9000,9004;ntopng;default;
+-F "clickhouse;tcp://127.0.0.1:9000;ntopng;default;password"
 ```
 
 ---
