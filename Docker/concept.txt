@@ -1,0 +1,37 @@
+commands 
+docker ps -> will show only running container 
+docker ps -a -> show all running and non running container
+docker images -> show all images 
+docker search -> search the images in repo
+docker pull -> Dowanload
+docker 
+
+Flags :-
+-p -> port { syntax: -p host_port:container_port }
+-it -> input terminal
+-d -> detached (background)
+-f -> forced 
+-a -> hidden 
+--name -> own name { syntax: --name"name_you_want" }
+
+docker run -itd -p "8080:" 
+syntax : docker pull [OPTIONS] NAME[:TAG|@DIGEST]
+eg ->  docker pull ubuntu
+
+
+
+
+🔹 Types of Storage in Docker
+
+Bind Mounts → map a host folder directly (manual).
+
+Volumes → managed by Docker (recommended).
+
+tmpfs → in-memory storage (disappears after restart).
+
+
+
+
+
+# Interview Questions
+ - find the os without loging the aws => cat /etc/os-release
