@@ -20,6 +20,7 @@ Flags :-
 -a -> hidden 
 -o -> output
 -i -> input 
+-v -> volume
 --name -> own name { syntax: --name"name_you_want" }
 
 docker run -itd -p "8080:" 
@@ -77,3 +78,4 @@ tmpfs → in-memory storage (disappears after restart).
 
 # Interview Questions
  - find the os without loging the aws => cat /etc/os-release
+ - Docker arichiture 
