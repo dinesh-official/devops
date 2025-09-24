@@ -1,12 +1,16 @@
 commands 
 --------
-docker ps -> will show only running container 
-docker ps -a -> show all running and non running container
-docker images -> show all images 
-docker search -> search the images in repo
-docker pull -> Dowanload
-docker inspect -> detailed info of container 
-docker 
+docker ps → will show only running container 
+docker ps -a → show all running and non running container
+docker images → show all images 
+docker search → search the images in repo
+docker pull → Dowanload
+docker inspect → detailed info of container 
+docker commit → creates a new image from a container
+docker save → exports an image to a file
+docker load → imports the image file back into Docker
+
+
 
 Flags :-
 -p -> port { syntax: -p host_port:container_port }
@@ -14,11 +18,47 @@ Flags :-
 -d -> detached (background)
 -f -> forced 
 -a -> hidden 
+-o -> output
+-i -> input 
 --name -> own name { syntax: --name"name_you_want" }
 
 docker run -itd -p "8080:" 
 syntax : docker pull [OPTIONS] NAME[:TAG|@DIGEST]
+syntax : docker commit CONTAINER_NAME_OR_ID IMAGE_NAME[:TAG]
+
 eg ->  docker pull ubuntu
+
+How to share images :
+
+- With internet
+  
+  - Step 1: Tag image
+    docker tag myimage:v1 dinesh/myimage:v1
+    
+  - Step 2: Login to Docker Hub
+    docker login
+    
+  - Step 3: Push image
+    docker push dinesh/myimage:v1
+    
+  - Step 4: Pull image on another machine (optional)
+    docker pull dinesh/myimage:v1
+    
+- Without internet
+  
+ - Step 1: Save image
+   docker save -o ./my_image_backup.tar my_image:v1
+   
+ - Step 2: Transfer file to another machine
+   scp ./my_image_backup.tar user@target_machine:/path/to/destination
+   
+ - Step 3: Load image
+   docker load -i ./my_image_backup.tar
+   
+ - Step 4: Verify
+   docker images
+
+
 
 
 
