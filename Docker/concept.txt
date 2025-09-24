@@ -1,9 +1,11 @@
 commands 
+--------
 docker ps -> will show only running container 
 docker ps -a -> show all running and non running container
 docker images -> show all images 
 docker search -> search the images in repo
 docker pull -> Dowanload
+docker inspect -> detailed info of container 
 docker 
 
 Flags :-
