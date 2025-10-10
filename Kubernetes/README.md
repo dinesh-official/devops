@@ -15,3 +15,9 @@ NodePort = NodePort + ClusterIp
 LoadBalancer => LoadBalancer + NodePort + ClusterIp
 
 ```
+
+```
+Flow will be
+
+Route53 -> LB -> Node port -> Cluster Ip -> Pod 
+```
