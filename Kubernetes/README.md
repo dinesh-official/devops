@@ -46,6 +46,8 @@ Taint Effects
  - NoExecute
  - PreferNoSchedule
 ```
+<img width="1588" height="1002" alt="image" src="https://github.com/user-attachments/assets/41f57d11-ca64-4f8d-89c3-286a010c6b9d" />
+
 ```
 1. General Pod
 2. General Pod (affinity: high-cpu, required during scheduling)
