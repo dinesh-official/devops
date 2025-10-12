@@ -22,7 +22,7 @@ Flow will be
 Route53 -> LB -> Node port -> Cluster Ip -> Pod 
 ```
 
-#### Node & Pod Affinity, Anti-Affinity, Taints & Tolerations Part-5 | DevOps | Ft. Greens technologies
+#### Node & Pod Affinity, Anti-Affinity, Taints & Tolerations 
 
 ```
 Node
@@ -72,6 +72,22 @@ How would you configure the Deployment to ensure high availability and proper Po
 Ans : I would use Pod Anti-Affinity in the Deployment spec with requiredDuringSchedulingIgnoredDuringExecution 
 and topologyKey: kubernetes.io/hostname. This ensures that each Pod is scheduled on a different node, 
 so no two Pods of the same application run on the same node, providing high availability across the cluster.
+```
+##### Master Persistent Volumes in Kubernetes 
+
+```
+Volume Types
+- EmptyDir -> Temporary Storage
+- hostPath -> Mount to host File System (Not Recommended)
+- Persistent Volumes
+Provisioning
+- Static Provisioning
+- Dynamic Provisioning
+YAML
+- Storage Class
+- Persistent Volume
+- Persistent Volume Claim
+- Pod
 ```
 
 
