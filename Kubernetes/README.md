@@ -88,6 +88,15 @@ YAML
  - Persistent Volume
  - Persistent Volume Claim
  - Pod
+
+Access Modes
+ - ReadWriteOnce (RWO) -› One node can read/write at a time
+ - ReadOnlyMany (ROX) -> Many nodes can read, but not write
+ - ReadWriteMany (RWX) -> Many nodes can read/write simultaneously
+Reclaim Policy
+ - Retain -- manual reclamation
+ - Recycle -- basic scrub (rm -rf /thevolume/*)
+ - Delete -- delete the volume
 ```
 
 
