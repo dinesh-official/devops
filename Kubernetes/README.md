@@ -23,7 +23,7 @@ Route53 -> LB -> Node port -> Cluster Ip -> Pod
 ```
 
 #### Node & Pod Affinity, Anti-Affinity, Taints & Tolerations Part-5 | DevOps | Ft. Greens technologies
-###### - V5
+
 ```
 Node
  - Node Selector
