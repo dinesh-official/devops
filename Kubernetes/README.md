@@ -33,6 +33,13 @@ Pod
  - Pod affinity
  - Pod anti affinity
 ```
+##### Taint & Toleration
+```
+Taint
+ - NoSchedule
+ - NoExecute
+ - PreferNoSchedule
+```
 ```
 1. General Pod
 2. General Pod (affinity: high-cpu, required during scheduling)
