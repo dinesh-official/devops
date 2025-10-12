@@ -33,3 +33,12 @@ Pod
  - Pod affinity
  - Pod anti affinity
 ```
+```
+1. General Pod
+2. General Pod (affinity: high-cpu, required during scheduling)
+3. General Pod (affinity: high-cpu, preferred during scheduling)
+4. General Pod (tolerations: Colour: Green)
+5. General Pod (tolerations: Colour: Green, Colour: Blue)
+
+
+```
