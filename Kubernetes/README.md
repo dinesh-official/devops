@@ -45,6 +45,10 @@ Pod
 ##### Interview Questions
 ```
 1. You have a 3-node cluster and want your Pod (or Deployment) to run only on node 2.
+
+Ans : “I’d label the second node with a custom label like node=second and then use a nodeAffinity rule under
+requiredDuringSchedulingIgnoredDuringExecution in my Pod spec to match that label. 
+This ensures Kubernetes only schedules the Pod or Deployment on node 2.”
 ```
 
 
