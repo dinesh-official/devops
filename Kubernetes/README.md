@@ -27,7 +27,7 @@ Route53 -> LB -> Node port -> Cluster Ip -> Pod
 ```
 Node
  - Node Selector
- - Node affinity
+ - Node affinity  -> ( Required ,Prefered )
  - Taint & Toleration
 Pod
  - Pod affinity
