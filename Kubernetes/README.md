@@ -61,15 +61,17 @@ Taint Effects
 ```
 1. You have a 3-node cluster and want your Pod (or Deployment) to run only on node 2.
 
-Ans : “I’d label the second node with a custom label like node=second and then use a nodeAffinity rule under
+Ans : I’d label the second node with a custom label like node=second and then use a nodeAffinity rule under
 requiredDuringSchedulingIgnoredDuringExecution in my Pod spec to match that label. 
-This ensures Kubernetes only schedules the Pod or Deployment on node 2.”
+This ensures Kubernetes only schedules the Pod or Deployment on node 2.
 
 2. You have a Kubernetes cluster with 5 nodes and want to deploy an application with 3 replicas (Pods).
 Each Pod must run on a different node so that no two Pods of the same application are scheduled on the same node.
 How would you configure the Deployment to ensure high availability and proper Pod distribution across nodes?
 
-Ans : 
+Ans : I would use Pod Anti-Affinity in the Deployment spec with requiredDuringSchedulingIgnoredDuringExecution 
+and topologyKey: kubernetes.io/hostname. This ensures that each Pod is scheduled on a different node, 
+so no two Pods of the same application run on the same node, providing high availability across the cluster.
 ```
 
 
