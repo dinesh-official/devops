@@ -22,7 +22,7 @@ Flow will be
 Route53 -> LB -> Node port -> Cluster Ip -> Pod 
 ```
 
-#### Node & Pod Affinity, Anti-Affinity, Taints & Tolerations 
+#### Node & Pod Affinity, Anti-Affinity, Taints & Tolerations Part 5
 
 ```
 Node
@@ -73,21 +73,21 @@ Ans : I would use Pod Anti-Affinity in the Deployment spec with requiredDuringSc
 and topologyKey: kubernetes.io/hostname. This ensures that each Pod is scheduled on a different node, 
 so no two Pods of the same application run on the same node, providing high availability across the cluster.
 ```
-##### Master Persistent Volumes in Kubernetes 
+#### Master Persistent Volumes in Kubernetes Part 6
 
 ```
 Volume Types
-- EmptyDir -> Temporary Storage
-- hostPath -> Mount to host File System (Not Recommended)
-- Persistent Volumes
+ - EmptyDir -> Temporary Storage
+ - hostPath -> Mount to host File System (Not Recommended)
+ - Persistent Volumes
 Provisioning
-- Static Provisioning
-- Dynamic Provisioning
+ - Static Provisioning
+ - Dynamic Provisioning
 YAML
-- Storage Class
-- Persistent Volume
-- Persistent Volume Claim
-- Pod
+ - Storage Class
+ - Persistent Volume
+ - Persistent Volume Claim
+ - Pod
 ```
 
 
