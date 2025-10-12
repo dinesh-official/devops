@@ -27,15 +27,21 @@ Route53 -> LB -> Node port -> Cluster Ip -> Pod
 ```
 Node
  - Node Selector
- - Node affinity  -> ( Required ,Prefered )
+ - Node affinity  
  - Taint & Toleration
 Pod
  - Pod affinity
  - Pod anti affinity
 ```
+##### Node affinity 
+```
+Node affinity
+ - Required Schedule
+ - Prefered Schedule
+```
 ##### Taint & Toleration
 ```
-Taint
+Taint Effects
  - NoSchedule
  - NoExecute
  - PreferNoSchedule
