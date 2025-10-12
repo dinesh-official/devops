@@ -42,3 +42,9 @@ Pod
 
 
 ```
+##### Interview Questions
+```
+1. You have a 3-node cluster and want your Pod (or Deployment) to run only on node 2.
+```
+
+
