@@ -6,6 +6,14 @@ COPY ‹source > ‹destination>
 RUN apt install git
 ENTRYPOINT python3 main.py
 
+--------
+COPY (OLD)
+ - Source (Local machine) -› Destination (Image)
+ADD (NEW)
+source (Local-machine)
+ -> Destination (Image)
+ - Can give http url as Source
+ - it extract tar and push to image
 ```
 #### Interview Questions
 ```
