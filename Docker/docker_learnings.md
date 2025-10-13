@@ -39,6 +39,22 @@ DOCKERFILE
  - ENV - is variable which will be used during "docker run" command
  - ARG - is variable which will be used during "docker build" command
  - USER - to change user who is executing the application
+
+----
+
+MULTI STAGE DOCKER BUILD
+
+JAVA CODE => maven .war => tomcat/jboss
+
+FROM openjdk:11
+WORK /opt
+ADD https://maven.org •
+COPY JAVACODE •
+RUN mvn clean install => app.war
+ADD https://tomcat.org.
+RUN cp ./app.war ./tomcat/webapps
+ENTRYPOINT ["sh", "./tomcat/bin/startup.sh"]
+EXPOSE 8080
 ```
 #### Interview Questions
 ```
