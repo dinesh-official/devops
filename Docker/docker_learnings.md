@@ -75,6 +75,12 @@ ADD https://tomcat.org •
 COPY --from=BUILDER /opt/app.war /opt/tomcat/webapps
 ENTRYPOINT ["sh", "./tomcat/bin/startup.sh"]
 EXPOSE 8080
+
+#### Docker Networking
+
+ - Bridge Network (only the same bridge can comminucate eg: Vpc )
+ - Host Network (direct expost to the host mechine )
+ - None (No network or Ip)
 ```
 #### Interview Questions
 ```
