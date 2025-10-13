@@ -80,6 +80,8 @@ Volume Types
  - EmptyDir -> Temporary Storage
  - hostPath -> Mount to host File System (Not Recommended)
  - Persistent Volumes
+   - EBS
+   - EFS
 Provisioning
  - Static Provisioning
  - Dynamic Provisioning
