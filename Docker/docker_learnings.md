@@ -34,6 +34,11 @@ CMD
  - CMD will be executed when the container is created from the Image
  - CMD will be executed after the EntryPoint
  - CMD is a default value which can be over-ridden during the "docker run" command
+
+DOCKERFILE
+ - ENV - is variable which will be used during "docker run" command
+ - ARG - is variable which will be used during "docker build" command
+ - USER - to change user who is executing the application
 ```
 #### Interview Questions
 ```
