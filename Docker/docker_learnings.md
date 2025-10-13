@@ -94,4 +94,8 @@ Ans:
   RUN apt-get update && apt install apache2 -y
   COPY ./index.html /usr/local/apache2/htdocs
   ENTRYPOINT ["service", "apache2", "start"]
+
+4. What is .dockeringore ?
+Ans:
+
 ```
