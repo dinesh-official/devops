@@ -1,10 +1,16 @@
 #### Master Adv Dockerfile and Docker Networking - Part 3
 ```
-FROM ‹basimage >
+FROM ‹ basimage >
+LABEL Name="Mithran"
 WORKDIR /app
-COPY ‹source > ‹destination>
+ADD < source >
+‹destination ›
+WORKDIR / code
+RUN apt-get update
+RUN apt install vim
 RUN apt install git
 ENTRYPOINT python3 main.py
+EXPOSE 8000
 
 --------
 COPY (OLD)
@@ -38,4 +44,14 @@ Ans: I reduce Docker image size by using lightweight base images like Alpine or 
  2. What is the difference between the COPY and ADD commands in a Dockerfile?
 Ans: COPY only copies local files into the image.
  ADD can copy files and also extract tar files or download from URLs.
+
+3. Write an sample docker file
+Ans:
+  FROM ubuntu:latest
+  LABEL Name="Dinesh"
+  LABEL ENV="Dev"
+  WORKDIR /app
+  RUN apt-get update && apt install apache2 -y
+  COPY ./index.html /usr/local/apache2/htdocs
+  ENTRYPOINT ["service", "apache2", "start"]
 ```
