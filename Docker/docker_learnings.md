@@ -53,8 +53,9 @@ COPY JAVACODE •
 RUN mvn clean install => app.war
 
 FROM openjdk:11-alpine
-ADD https://tomcat.org •
-RUN cp ./app.war ./tomcat/webapps
+WORKDIR / opt
+ADD https://tomcat.org
+COPY --from=0 /opt/app.war / opt/tomcat/webapps
 ENTRYPOINT ["sh", "./tomcat/bin/startup.sh"]
 EXPOSE 8080
 
