@@ -3,9 +3,8 @@
 FROM ‹ basimage >
 LABEL Name="Mithran"
 WORKDIR /app
-ADD < source >
-‹destination ›
-WORKDIR / code
+ADD < source > ‹destination ›
+WORKDIR /code
 RUN apt-get update
 RUN apt install vim
 RUN apt install git
