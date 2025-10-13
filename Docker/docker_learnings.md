@@ -97,25 +97,13 @@ Ans:
 
 4. What is .dockeringore ?
 Ans:
-# 1️⃣ Remove all stopped containers
+
 docker container prune -f
-
-# 2️⃣ Remove dangling images (untagged)
 docker image prune -f
-
-# 3️⃣ Remove all unused images
 docker image prune -a -f
-
-# 4️⃣ Remove all unused volumes
 docker volume prune -f
-
-# 5️⃣ Remove all unused networks
 docker network prune -f
-
-# 6️⃣ Remove everything (containers, images, networks, build cache)
 docker system prune -f
 
-# 7️⃣ Remove everything including volumes
-docker system prune -a --volumes -f
 
 ```
