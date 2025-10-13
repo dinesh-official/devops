@@ -10,9 +10,9 @@ ENTRYPOINT python3 main.py
 COPY (OLD)
  - Source (Local machine) -› Destination (Image)
 ADD (NEW)
-Source (Local machine) -› Destination (Image)
-- https://github.com/myrepo.git -› Destination (Image) (Can give http url as Source)
-- myfiles.tar -› Destination (Image) -› (it extract tar and push to image)
+ - Source (Local machine) -› Destination (Image)
+ - https://github.com/myrepo.git -› Destination (Image) (Can give http url as Source)
+ - myfiles.tar -› Destination (Image) -› (it extract tar and push to image)
 ```
 #### Interview Questions
 ```
