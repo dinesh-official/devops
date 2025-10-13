@@ -60,6 +60,21 @@ ENTRYPOINT ["sh", "./tomcat/bin/startup.sh"]
 EXPOSE 8080
 
 docker build -t myimage:v1
+
+----
+
+FROM openjdk:11 AS BUILDER
+WORK /opt
+ADD https://maven.org
+COPY JAVACODE •
+RUN mvn clean install => app.war
+
+FROM openjdk:11-alpine
+WORKDIR / opt
+ADD https://tomcat.org •
+COPY --from=BUILDER /opt/app.war /opt/tomcat/webapps
+ENTRYPOINT ["sh", "./tomcat/bin/startup.sh"]
+EXPOSE 8080
 ```
 #### Interview Questions
 ```
