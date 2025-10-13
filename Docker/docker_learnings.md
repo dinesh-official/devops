@@ -46,15 +46,19 @@ MULTI STAGE DOCKER BUILD
 
 JAVA CODE => maven .war => tomcat/jboss
 
-FROM openjdk:11
+FROM openjdk :11
 WORK /opt
-ADD https://maven.org •
+ADD https://maven.org.
 COPY JAVACODE •
 RUN mvn clean install => app.war
-ADD https://tomcat.org.
+
+FROM openjdk:11-alpine
+ADD https://tomcat.org •
 RUN cp ./app.war ./tomcat/webapps
 ENTRYPOINT ["sh", "./tomcat/bin/startup.sh"]
 EXPOSE 8080
+
+docker build -t myimage:v1
 ```
 #### Interview Questions
 ```
