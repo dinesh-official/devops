@@ -126,6 +126,14 @@ I
 2:01:45 PM Fourth Check (within 10 seconds give a response, Fail)
 2:02:15 PM Fifth Check (within 10 seconds give a response, Sucess)
 2:02:45 PM Sixth Check (within 10 seconds give a response, sucess)
+
+---
+
+init Container - Setup/validation tasks before app starts
+sidecar Container - Shared tasks like logging, proxy, monitoring
+static Container - Managed by Kubelet not Api Server
+ephemeral Container - Temporary debugging, troubleshooting
+
 ```
 <img width="2126" height="1020" alt="image" src="https://github.com/user-attachments/assets/33893a32-0426-45ca-9f37-a55fad8daaeb" />
 
