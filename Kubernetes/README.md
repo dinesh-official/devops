@@ -105,4 +105,22 @@ Reclaim Policy
 • RWOP - ReadWriteOncePod
 ```
 
+#### Master Config map, Secrets, Liveness, Readiness & Probes - Part 7 
+```
+Probes:
+  Startup Probe
+  Liveness Probe
+  Readiness Probe
+
+initialDelaySeconds
+periodSeconds:
+failureThreshold:
+successThreshold:
+timeoutSeconds:
+
+2:00:00 PM Startup Probe
+2:00:05 PM Liveness Probe & Readiness Probe
+
+```
+<img width="2126" height="1020" alt="image" src="https://github.com/user-attachments/assets/33893a32-0426-45ca-9f37-a55fad8daaeb" />
 
