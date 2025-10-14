@@ -112,15 +112,20 @@ Probes:
   Liveness Probe
   Readiness Probe
 
-initialDelaySeconds
-periodSeconds:
-failureThreshold:
-successThreshold:
-timeoutSeconds:
+initialDelaySeconds: 15  (inital starting time)
+periodSeconds: 30        (30 sec once it will check )
+failureThreshold: 4      (if 4 times failed it will marked as failed)
+successThreshold: 2      (if 2 time sucess it will marked as sucess )
+timeoutSeconds: 10       (after check the resonce need to get within 10 sec )
 
-2:00:00 PM Startup Probe
-2:00:05 PM Liveness Probe & Readiness Probe
-
+I
+2:00:00 PM
+2:00:15 PM First Check (within 10 seconds give a response, Fail)
+2:00:45 PM Second Check (within 10 seconds give a response, Fail)
+2:01:15 PM Third Check (within 10 seconds give a response, Fail)
+2:01:45 PM Fourth Check (within 10 seconds give a response, Fail)
+2:02:15 PM Fifth Check (within 10 seconds give a response, Sucess)
+2:02:45 PM Sixth Check (within 10 seconds give a response, sucess)
 ```
 <img width="2126" height="1020" alt="image" src="https://github.com/user-attachments/assets/33893a32-0426-45ca-9f37-a55fad8daaeb" />
 
