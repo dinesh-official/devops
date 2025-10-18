@@ -189,3 +189,36 @@ Argo CD
 Service Mesh ISTIO
 
 ```
+
+```
+CNI -> VPC CNI (Flannel, Calico)
+CSI -> EFS CSI, EBS CSI
+CRI -> ContinerD
+
+Open Container Image (OCI) - Compliant Container Images
+
+Docker
+ContinerD
+PODman
+CRI-O
+
+
+Network Policy
+Pod Security Policy (PSP) -> Pod Security Admission
+
+
+====
+
+Pod Disruption Budget -> 2 POD
+Kubectl drain ‹node> -> Evict all pods from the node kubectl cordon -› This makes the node as un-schedulable kubectl uncordon -› This makes the node as schedulable
+
+Upgrading your kubernetes cluster.
+1. Backup Everything
+2. Read the Release Notes
+3. Do the upgrading in Staging
+4. Pod Distrubtion Budget
+5. Control Plane Upgrade
+6. New Worker Nodes compatible with 1.33
+7. cordon & drain the old nodes to reschedule pods to new node group
+8. Upgrade the add on version
+```
