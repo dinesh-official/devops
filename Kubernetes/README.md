@@ -210,7 +210,9 @@ Pod Security Policy (PSP) -> Pod Security Admission
 ====
 
 Pod Disruption Budget -> 2 POD
-Kubectl drain ‹node> -> Evict all pods from the node kubectl cordon -› This makes the node as un-schedulable kubectl uncordon -› This makes the node as schedulable
+Kubectl drain ‹node> -> Evict all pods from the node
+kubectl cordon -› This makes the node as un-schedulable
+kubectl uncordon -› This makes the node as schedulable
 
 Upgrading your kubernetes cluster.
 1. Backup Everything
