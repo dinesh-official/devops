@@ -137,3 +137,11 @@ ephemeral Container - Temporary debugging, troubleshooting
 ```
 <img width="2126" height="1020" alt="image" src="https://github.com/user-attachments/assets/33893a32-0426-45ca-9f37-a55fad8daaeb" />
 
+Kubernetes StatefulSets, Jobs, CronJobs, HPA & VPA
+
+```
+Job -> Pod (Short Lived Pod)
+CronJob -> Job - > Pod (Short Lived Pod)
+```
+
+
