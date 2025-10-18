@@ -144,4 +144,48 @@ Job -> Pod (Short Lived Pod)
 CronJob -> Job - > Pod (Short Lived Pod)
 ```
 
+<img width="1153" height="529" alt="image" src="https://github.com/user-attachments/assets/c7ed62aa-5117-4851-92ef-5fc1524e5a03" />
 
+
+```
+Pods
+Job
+CronJob
+ReplicaSet
+DaemonSet
+Deployment
+
+StatefulSet
+Clusterlp NodePort
+LoadBalancer
+Headless Service
+ExternalName
+```
+
+
+```
+Day 9
+Job
+CronJob
+Statefulset
+Headless Service
+External Name Service
+Request & Limit
+HPA VPA
+Troubleshooting Issue in Kubernetes
+
+Day 10 (Finale)
+CSI CNI CRI
+Network Policy & Pod Security policy kubectl drain & Cordon
+Security Context ?
+What is Custom Resource Definition ?
+Operators
+Revise & Future !
+
+Additionals
+Helm Chart
+Kustomize
+Argo CD
+Service Mesh ISTIO
+
+```
