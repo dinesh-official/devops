@@ -223,4 +223,70 @@ Upgrading your kubernetes cluster.
 6. New Worker Nodes compatible with 1.33
 7. cordon & drain the old nodes to reschedule pods to new node group
 8. Upgrade the add on version
+
+
+HIGHLY IMPORTANT:
+What is Liveness, Readiness, Startup Probes ?
+What is Kubernetes Architecture ? Explain each component UseCases How do you Troubleshoot Kubernetes pods ?
+- https://learnk8s.io/troubleshooting-deployments
+What are the different services within Kubernetes?
+What is an Ingress Controller (AWS Load Balancer As Ingress Controller)
+(AWS Load
+What is helm Charts in k8 / Helm Commands?
+
+====================================================================
+
+FREQUENTLY ASKED:
+What is Container Network Interface (CNI) and CSI (Container Storage Interface) and Cont
+Interface (CRI) ?
+kubernetes imperative way (using CLI) vs declarative way (writing as YAML)
+Life Cycle of Pod ?
+What is Monolithic vs Microservice ?
+Why Kubernetes?
+Ways of Installation Kubernetes ?
+Kubernetes Namespaces / What are default NameSpaces ?
+Replica Set Yaml file ?
+Deamon set Yaml file ?
+Stateful Set yaml file?
+Deployment yaml file ?
+Replication Controller yaml file?
+HPA -> Hortizonal Pod Autoscaling vs VPA Vertical Pod Autoscaling
+Deployment Strategies ?
+Blue Green Deployment in Kubernetes
+НАоМ мхія
+kind: pod vs deployment
+Job vs CronJob ?
+Nodeport Yaml file?
+Cluster IP Yaml file?
+LoadBalancer Yaml File?
+Env Variables yaml file
+Config Map yaml file
+Secrets yaml file
+Volumes yaml file
+Persistent Volume yaml file
+What is a Namespace in Kubernetes? Name the initial namespaces from which Kubernetes starts ?
+What is the syntax for the Kubectl command?
+What is a Headless Service?
+What is a init container, and what would you use it for?
+What is a sidecar container, and what would you use it for?
+What is a Ephemeral container, and what would you use it for?
+What are the Selector labels in Kubernetes?
+What is Request & Limit to PODS / how to Assign CPU & Memory Resources to Container ?
+What is ContainerPort, Port, NodePort, TargetPort ?
+How Kubernetes Schedular Decides in Which Node to Schedule the POD ?
+Explain Affinity and Anti-Affinity ?
+Explain Taint & Tolerations ?
+What do you mean by Persistent Volume ?
+What do you mean by Persistent Volume Claim?
+What are the access modes of Persistent Volume?
+What are the Reclaim policy available in Persistent Volumes
+What is kubectl drain?
+What is Network Policy is Kubernetes/ how do you Restrict Pod to Pod Communication in ku
+What is POD Security Policy is Kubernetes ?
+What is Custom Resource Definition ?
+What is RBAC ?
+What is Role and RoleBinding RBAC ?
+What is ClusterRole and ClusterRole Binding in RBAC ?
+What is Service Account in RBAC ?
+
 ```
