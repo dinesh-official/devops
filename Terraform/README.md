@@ -109,13 +109,13 @@ tags = {
   }
 }
 
-* For Each
-
-
-<img width="743" height="464" alt="image" src="https://github.com/user-attachments/assets/e0023f3e-fd14-4b5b-993e-9c4b7321efb4" />
-
-
-
 
 ```
+
+* For Each map
+<img width="743" height="464" alt="image" src="https://github.com/user-attachments/assets/e0023f3e-fd14-4b5b-993e-9c4b7321efb4" />
+
+* For Each set
+<img width="576" height="247" alt="image" src="https://github.com/user-attachments/assets/3b67c40f-a6ad-44a0-b7e9-80062186531e" />
+
 
