@@ -86,3 +86,36 @@ resource "aws_vpc" "Sing-VPC" {
 }
 ```
 
+```txt
+Statefile
+---------
+* It keep all the changes as log
+
+
+Immutable
+---------
+* minor change it will edit and if major changes it will delete it and re-create it
+
+Meta-Arguments
+-------------------------
+* Count
+
+# meta-argument
+resource "aws_vpc" "my-vpc-1" {
+  cidr_block = "10.0.0.0/16"
+  count = 2
+tags = {
+  "Name" = "terra-vpc-mumbai-${count.index}"
+  }
+}
+
+* For Each
+
+
+<img width="743" height="464" alt="image" src="https://github.com/user-attachments/assets/e0023f3e-fd14-4b5b-993e-9c4b7321efb4" />
+
+
+
+
+```
+
