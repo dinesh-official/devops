@@ -34,3 +34,55 @@ Symantic Versioning
 
 <img width="685" height="471" alt="image" src="https://github.com/user-attachments/assets/6fc6228f-0ae5-4bcc-a030-1de3c437dc58" />
 
+
+```txt
+Multiple provider
+-----------------
+
+terraform {
+  required_version = "~> 1.11.0"
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "'~> 4.0"
+    }
+  }
+}
+
+# Provider-1 for Mumbai (Default Provider)
+provider "aws" {
+  region = "ap-south-1"
+  access_key = "userAcc1-my-access-key"
+  secret_key = "userAcc1-my-secret-key"
+}
+
+# Provider-2 for Singapore
+provider "aws" {
+  region = "ap-southeast-1"
+  access_key = "userAcc2-my-access-key"
+  secret_key = "userAcc2-my-secret-key"
+  alias= "sing"
+}
+
+# Resource Block to Create VPC in ap-south-1 which uses default provider
+resource "aws_vpc" "Mumbai-VPC" {
+  cidr_block       = "10.0.0.0/16"
+  instance_tenancy = "default"
+
+  tags = {
+    Name = "Mumbai-VPC"
+  }
+}
+
+# Resource Block to Create VPC in ap-southeast-1 which uses default provider
+resource "aws_vpc" "Sing-VPC" {
+  cidr_block       = "10.0.0.0/16"
+  instance_tenancy = "default"
+  provider = aws.sing             # Here vwe are refreing the provider for singapore 
+
+  tags = {
+    Name = "Sing-VPC"
+  }
+}
+```
+
