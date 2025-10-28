@@ -121,12 +121,19 @@ tags = {
 ```
 Lifecycle
 ---------
-* Create Before Destroy
-* Prevent Destroy
+* Create Before Destroy  => if true it will create an new resorce after delete && if it is false it will first create an resorce and after it will delete
+* Prevent Destroy => it prevents from the resorce destroy
+* Ignore changes => it prevent or ignore the change which are mentioned in the tf code 
+* Depends On => it will make the order only the mentiond resorce is create after it create the resorce it depends on the other resorce 
 ```
 <img width="705" height="267" alt="image" src="https://github.com/user-attachments/assets/cdda0fd4-25fa-485d-8412-80e42c93b570" />
 
 <img width="732" height="235" alt="image" src="https://github.com/user-attachments/assets/b8da0455-2522-4edf-9779-60c45e2e76ff" />
+<img width="707" height="281" alt="image" src="https://github.com/user-attachments/assets/a7d5a13a-ce22-4a27-8cdd-44944c1f65a8" />
+
+
+<img width="1016" height="288" alt="image" src="https://github.com/user-attachments/assets/50bdeb28-d7cd-423c-9662-e4ab90a12a7f" />
+
 
 
 
