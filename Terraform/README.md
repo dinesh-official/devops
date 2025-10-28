@@ -149,7 +149,7 @@ Variables -» default 1
 if no default then it will ask for Input
 
 ```
-
+#### Backend 
 
 <img width="435" height="534" alt="image" src="https://github.com/user-attachments/assets/865e3929-74a0-40f2-b1cc-7bbfcf02528c" />
 
@@ -166,6 +166,8 @@ if no default then it will ask for Input
 
 - terraform validate
 - terraform state
+- terraform state list
+- terraform state show ‹resource_type›.‹resource_name>
 - terraform force-unlock LockID
 - terraform taint
 - terraform untaint
