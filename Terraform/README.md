@@ -134,6 +134,21 @@ Lifecycle
 
 <img width="1016" height="288" alt="image" src="https://github.com/user-attachments/assets/50bdeb28-d7cd-423c-9662-e4ab90a12a7f" />
 
+---
+
+
+```
+Variables Basic
+Variables when prompted => get the input on executon through terminal if deafult value is not provided 
+Variables override with ENV
+
+
+ELI 5
+ENV VAR 7
+Variables -» default 1
+if no default then it will ask for Input
+
+```
 
 
 
