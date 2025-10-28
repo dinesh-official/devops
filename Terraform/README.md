@@ -151,4 +151,30 @@ if no default then it will ask for Input
 ```
 
 
+<img width="435" height="534" alt="image" src="https://github.com/user-attachments/assets/865e3929-74a0-40f2-b1cc-7bbfcf02528c" />
+
+
+```tf
+
+# Terraform State Commands
+
+## Terraform Commands
+- terraform show
+- terraform refresh
+- terraform plan(internally calls refresh - temporary refresh)
+- terraform fmt
+
+- terraform validate
+- terraform state
+- terraform force-unlock LockID
+- terraform taint
+- terraform untaint
+- terraform apply -target command
+- terraform import ‹resource_type›.‹resource_name> ‹resource_id>
+
+```
+
+
+
+
 
