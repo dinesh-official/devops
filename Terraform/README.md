@@ -122,6 +122,7 @@ tags = {
 Lifecycle
 ---------
 * Create Before Destroy
+* Prevent Destroy
 ```
 <img width="705" height="267" alt="image" src="https://github.com/user-attachments/assets/cdda0fd4-25fa-485d-8412-80e42c93b570" />
 
