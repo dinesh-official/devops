@@ -1,3 +1,21 @@
+
+# Summary 
+
+| Node Taint       | Pod Toleration   | Result                               | Explanation                                                             |
+| ---------------- | ---------------- | ------------------------------------ | ----------------------------------------------------------------------- |
+| NoSchedule       | NoSchedule       | ✅ Pod runs                           | Exact match of strict taint                                             |
+| NoSchedule       | PreferNoSchedule | ❌ Pod not scheduled                  | Soft toleration does not satisfy strict NoSchedule                      |
+| NoSchedule       | NoExecute        | ❌ Pod not scheduled                  | Effect mismatch; NoExecute toleration doesn’t satisfy NoSchedule        |
+| PreferNoSchedule | PreferNoSchedule | ✅ Pod runs                           | Matches soft taint                                                      |
+| PreferNoSchedule | NoSchedule       | ⚠️ Pod may run                       | Scheduler may place pod if no better nodes; soft preference ignored     |
+| PreferNoSchedule | NoExecute        | ⚠️ Pod may run                       | Soft taint ignored; eviction rules don’t apply as node is not NoExecute |
+| NoExecute        | NoExecute        | ✅ Pod runs & stays                   | Exact match; pod tolerates eviction rules                               |
+| NoExecute        | NoSchedule       | ⚠️ Pod scheduled but may get evicted | Effect mismatch; NoExecute taint may evict pod immediately              |
+| NoExecute        | PreferNoSchedule | ⚠️ Pod scheduled but may get evicted | Effect mismatch; NoExecute taint may evict pod immediately              |
+
+
+
+
 # Equal 
 
 
