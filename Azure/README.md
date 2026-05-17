@@ -18,3 +18,7 @@
 # Tagging
 
 <img width="476" height="102" alt="Screenshot 2026-05-17 at 2 36 33 PM" src="https://github.com/user-attachments/assets/127a37c3-68a3-49e0-ab89-0d4738686809" />
+
+
+# Resource Lock
+<img width="858" height="190" alt="image" src="https://github.com/user-attachments/assets/e0ba809b-cb08-43c9-8ace-4883cb99bf6d" />
