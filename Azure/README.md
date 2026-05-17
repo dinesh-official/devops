@@ -31,5 +31,5 @@
 
 <img width="1197" height="682" alt="image" src="https://github.com/user-attachments/assets/6fa46226-ddfd-4dfb-a26a-4598a03e2b0a" />
 
-![Uploading image.png…]()
+<img width="1111" height="492" alt="image" src="https://github.com/user-attachments/assets/260663cc-8247-4ebf-b2d1-2552cf35d9a5" />
 
