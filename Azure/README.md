@@ -4,8 +4,17 @@
 <img width="1200" height="539" alt="Screenshot 2026-05-17 at 2 21 29 PM" src="https://github.com/user-attachments/assets/cfb08e22-0fe0-4816-a158-56b6b8e0df4f" />
 
 
-# Resource Group
+
 
 
 # Azure Resource Manager (ARM)
 <img width="1101" height="553" alt="Screenshot 2026-05-17 at 2 15 40 PM" src="https://github.com/user-attachments/assets/859f0b01-6e4c-4abc-8c3d-c1afbb9f2a8e" />
+
+
+# Naming Convention
+
+<img width="1116" height="204" alt="image" src="https://github.com/user-attachments/assets/3b739f66-df08-4292-96b8-d65bd0c9c4a9" />
+
+# Tagging
+
+<img width="476" height="102" alt="Screenshot 2026-05-17 at 2 36 33 PM" src="https://github.com/user-attachments/assets/127a37c3-68a3-49e0-ab89-0d4738686809" />
